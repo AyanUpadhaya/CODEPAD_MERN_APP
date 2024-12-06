@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { If, Then, Else } from "react-if";
 import SearchLoader from "../../components/shared/SearchLoader";
 import usePosts from "../../hooks/usePosts";
@@ -48,6 +48,10 @@ const Docs = () => {
     ?.sort(sortByTime)
     ?.filter((item) => filterByLanguage(item, language))
     ?.filter((item) => filterSearchTitle(item, searchValue));
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top-left corner of the page
+  }, []); // Empty dependency array ensures this runs only on mount
 
   return (
     <div className="bg-base-200 min-h-screen py-3 px-4 ">

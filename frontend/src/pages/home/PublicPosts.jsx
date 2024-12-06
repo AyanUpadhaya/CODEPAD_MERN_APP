@@ -1,4 +1,3 @@
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -84,18 +83,18 @@ const PublicPosts = () => {
   );
 
   return (
-    <div className="bg-base-200 py-10 ">
+    <div id="trending" className="bg-base-200 py-10 ">
       <div className="max-w-[1200px] mx-auto h-full flex flex-col justify-between items-center">
-        <div className="py-5 flex flex-col gap-5 ">
-          <h2 className="text-neutral-950 font-poppins font-normal text-6xl text-center">
+        <div className="py-5 flex flex-col gap-2 md:gap-5 ">
+          <h2 className="text-neutral-950 font-poppins font-normal text-2xl sm:text-4xl md:text-6xl text-center">
             Top Trendings
           </h2>
-          <p className="text-neutral-950 font-poppins font-normal text-2xl text-center">
+          <p className="text-neutral-950 font-poppins font-normal text-base sm:text-lg md:text-2xl text-center">
             See what people are posting
           </p>
         </div>
       </div>
-      <div className="max-w-[1200px] mx-auto py-10">{renderData}</div>
+      <div className="max-w-[1200px] mx-auto py-2 md:py-10">{renderData}</div>
       <CodeViewModal
         handleDownload={handleDownload}
         data={selectedItem}

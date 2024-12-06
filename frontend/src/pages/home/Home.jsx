@@ -1,3 +1,4 @@
+import Footer from "../../components/shared/Footer";
 import Features from "./Features";
 import Header from "./Header";
 import PublicPosts from "./PublicPosts";
@@ -10,6 +11,7 @@ function Home() {
       <Features></Features>
       <Reviews></Reviews>
       <PublicPosts></PublicPosts>
+      <Footer></Footer>
     </div>
   );
 }
