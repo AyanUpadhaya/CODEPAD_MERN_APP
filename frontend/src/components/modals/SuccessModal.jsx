@@ -25,9 +25,11 @@ const SuccessModal = ({ data, msg, isSuccess, handleNavigate }) => {
                 <h2 className=" text-successs font-monts text-xl sm:text-4xl font-bold">
                   Successful!
                 </h2>
-                <p className=" text-black-700 font-monts text-base sm:text-2xl">
-                  {"Your secret key: " + data?.secret}
-                </p>
+                {data?.secret && (
+                  <p className=" text-black-700 font-monts text-base sm:text-2xl">
+                    {"Your secret key: " + data?.secret}
+                  </p>
+                )}
                 <p className=" text-black-700 font-monts text-base sm:text-2xl">
                   {msg}
                 </p>
@@ -35,11 +37,13 @@ const SuccessModal = ({ data, msg, isSuccess, handleNavigate }) => {
             </div>
             <div>
               <div className="w-full flex justify-center">
-                <label onClick={()=>{
-                  handleNavigate(
-                    `/details/${data.id}`
-                  );
-                }} htmlFor="successModal" className="btn btn-success">
+                <label
+                  onClick={() => {
+                    handleNavigate(`/details/${data.id}`);
+                  }}
+                  htmlFor="successModal"
+                  className="btn btn-success"
+                >
                   Continue
                 </label>
               </div>

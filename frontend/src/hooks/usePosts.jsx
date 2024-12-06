@@ -6,6 +6,7 @@ const usePosts = () => {
   const [loading, setLoading] = useState(false); // Loading state
   const [isPosRequestLoading, setPosRequestLoading] = useState(false); // Loading state
   const [isDeleteRequestLoading, setDeleteRequestLoading] = useState(false); // Loading state
+  const [isPostUpdating, setIsPostUpdating] = useState(false); // Loading state
   const [isPosRequestSuccess, setPosRequestSuccess] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
 
@@ -70,20 +71,22 @@ const usePosts = () => {
 
   // Update a post by ID and secret
   const updatePost = async (postId, updateData) => {
-    setLoading(true);
+    setIsPostUpdating(true);
     setError(null);
     try {
       const { data } = await axios.put(
         `${API_BASE_URL + END_POINTS["PUT"]}/${postId}`,
         updateData
       );
-      setPosts((prevPosts) =>
-        prevPosts.map((post) => (post.id === postId ? data.data : post))
-      ); // Update the specific post
+     
+      setPosRequestSuccess(true);
+      console.log("API Response Data:", data?.data);
+      return data?.data;
     } catch (err) {
       setError(err.response?.data?.message || "Failed to update post.");
+      console.log({ err });
     } finally {
-      setLoading(false);
+      setIsPostUpdating(false);
     }
   };
 
@@ -114,6 +117,7 @@ const usePosts = () => {
     isPosRequestLoading,
     isPosRequestSuccess,
     isDeleteRequestLoading,
+    isPostUpdating,
     error,
     fetchPosts,
     createPost,

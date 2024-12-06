@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import formatTimestamp from "../../utils/formatTimestamp";
 
 const SinglePostCards = ({ data, setSelectedItem }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="card card-compact bg-base-100 w-[500px] h-auto shadow-xl">
@@ -30,7 +32,17 @@ const SinglePostCards = ({ data, setSelectedItem }) => {
             >
               View Code
             </label>
-            <button className="cursor-pointer p-1 font-poppins text-center text-white hover:text-neutral-800 bg-slate-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-badge">
+            <button
+              onClick={() =>
+                navigate(`/update_post`, {
+                  state: {
+                    payload: data,
+                    type: "edit",
+                  },
+                })
+              }
+              className="cursor-pointer p-1 font-poppins text-center text-white hover:text-neutral-800 bg-slate-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-badge"
+            >
               Edit
             </button>
             <label

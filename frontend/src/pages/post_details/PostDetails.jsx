@@ -42,6 +42,7 @@ const PostDetails = () => {
     deletePost(params.id, secretKey)
       .then(() => {
         infoNotify("Post has been deleted");
+        navigate("/docs");
       })
       .catch((error) => {
         console.log(`${error.message} || "Failed to delete post`);

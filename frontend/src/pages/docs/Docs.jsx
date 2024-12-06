@@ -50,7 +50,7 @@ const Docs = () => {
     ?.filter((item) => filterSearchTitle(item, searchValue));
 
   return (
-    <div className="bg-base-200 py-3 px-4 ">
+    <div className="bg-base-200 min-h-screen py-3 px-4 ">
       {/* buttons */}
       <div className="max-w-[1200px] mx-auto h-full flex flex-col justify-between items-center">
         <div className="w-full flex justify-between flex-wrap gap-4 py-5">
