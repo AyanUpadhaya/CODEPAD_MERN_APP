@@ -2,12 +2,12 @@ const { pool } = require("../db/db");
 
 const create = async (prop) => {
   const INSERT_QUERY = `
-    INSERT INTO PublicCodePosts (title, about, language, code, timestamp, name, email, secret)
+    INSERT INTO publiccodeposts (title, about, language, code, timestamp, name, email, secret)
     VALUES (?, ?, LOWER(?), ?, ?, ?, ?, ?);
   `;
 
   const SELECT_QUERY = `
-    SELECT * FROM PublicCodePosts WHERE id = ?;
+    SELECT * FROM publiccodeposts WHERE id = ?;
   `;
 
   let client;
@@ -37,7 +37,7 @@ const create = async (prop) => {
     return rows[0]; // Return the first (and only) row as an object
   } catch (error) {
     console.error(
-      "Error occurred while creating PublicCodePosts:",
+      "Error occurred while creating publiccodeposts:",
       error.message
     );
     throw error;
@@ -104,9 +104,7 @@ const updateByIdAndSecret = async (update, id, secret) => {
   try {
     client = await pool.getConnection();
     const [result] = await client.query(QUERY, [update, id, secret]);
-    if (result.affectedRows === 0) {
-      throw new Error("Post not found or invalid secret !!");
-    }
+    
 
     // Fetch the newly inserted row using the insertId
     const [rows] = await client.query(SELECT_QUERY, [id]);
