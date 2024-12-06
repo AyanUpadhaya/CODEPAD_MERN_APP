@@ -10,7 +10,7 @@ const Reviews = () => {
   const data = [
     {
       review:
-        "Codeanywhere's containers with pre-built tech stacks are a giant step in the right direction! It helps remove a lot of the dreaded setup and environmental configuration developers need to do, which is always welcome.",
+        "CodePad's containers with pre-built tech stacks are a giant step in the right direction! It helps remove a lot of the dreaded setup and environmental configuration developers need to do, which is always welcome.",
       author: "Adrienne Tacke",
       position: "Developer Advocate at MongoDB",
     },
@@ -22,7 +22,7 @@ const Reviews = () => {
     },
     {
       review:
-        "I love it. It's especially great for my open source projects, no need to install anything on my local machine. Just paste my GitHub URL and Codeanywhere takes care of the rest.",
+        "I love it. It's especially great for my open source projects, no need to install anything on my local machine. Just paste my GitHub URL and codepad takes care of the rest.",
       author: "Marko Bozic",
       position: "Director of Engineering at Noom",
     },
@@ -34,7 +34,7 @@ const Reviews = () => {
     },
     {
       review:
-        "I love it. It's especially great for my open source projects, no need to install anything on my local machine. Just paste my GitHub URL and Codeanywhere takes care of the rest.",
+        "I love it. It's especially great for my open source projects, no need to install anything on my local machine. Just paste my GitHub URL and codepad takes care of the rest.",
       author: "Marko Bozic",
       position: "Director of Engineering at Noom",
     },
@@ -46,7 +46,7 @@ const Reviews = () => {
     },
     {
       review:
-        "I love it. It's especially great for my open source projects, no need to install anything on my local machine. Just paste my GitHub URL and Codeanywhere takes care of the rest.",
+        "I love it. It's especially great for my open source projects, no need to install anything on my local machine. Just paste my GitHub URL and codepad takes care of the rest.",
       author: "Marko Bozic",
       position: "Director of Engineering at Noom",
     },
@@ -58,7 +58,7 @@ const Reviews = () => {
     },
     {
       review:
-        "I love it. It's especially great for my open source projects, no need to install anything on my local machine. Just paste my GitHub URL and Codeanywhere takes care of the rest.",
+        "I love it. It's especially great for my open source projects, no need to install anything on my local machine. Just paste my GitHub URL and codepad takes care of the rest.",
       author: "Marko Bozic",
       position: "Director of Engineering at Noom",
     },

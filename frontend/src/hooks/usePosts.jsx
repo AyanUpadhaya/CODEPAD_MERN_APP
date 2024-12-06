@@ -5,6 +5,7 @@ const usePosts = () => {
   const [posts, setPosts] = useState([]); // Stores all posts
   const [loading, setLoading] = useState(false); // Loading state
   const [isPosRequestLoading, setPosRequestLoading] = useState(false); // Loading state
+  const [isDeleteRequestLoading, setDeleteRequestLoading] = useState(false); // Loading state
   const [isPosRequestSuccess, setPosRequestSuccess] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
 
@@ -88,7 +89,7 @@ const usePosts = () => {
 
   // Delete a post by ID and secret
   const deletePost = async (postId, secret) => {
-    setLoading(true);
+    setDeleteRequestLoading(true);
     setError(null);
     try {
       await axios.delete(`${API_BASE_URL + END_POINTS["DELETE"]}/${postId}`, {
@@ -98,7 +99,7 @@ const usePosts = () => {
     } catch (err) {
       setError(err.response?.data?.message || "Failed to delete post.");
     } finally {
-      setLoading(false);
+      setDeleteRequestLoading(false);
     }
   };
 
@@ -112,6 +113,7 @@ const usePosts = () => {
     loading,
     isPosRequestLoading,
     isPosRequestSuccess,
+    isDeleteRequestLoading,
     error,
     fetchPosts,
     createPost,

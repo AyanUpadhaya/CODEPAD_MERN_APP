@@ -30,7 +30,13 @@ const CodeViewModal = ({ modalClose, data, handleDownload }) => {
                 </h2>
                 <p className=" font-monts text-sm text-white">{data?.about}</p>
               </div>
-              <div>
+              <div className="flex gap-4">
+                <label
+                  htmlFor="codeViewPopUp"
+                  className="text-center cursor-pointer flex flex-col justify-center items-center  px-2 py-2 font-poppins text-white bg-red-500 hover:bg-red-500  min-w-[130px]  text-sm rounded-md"
+                >
+                  Close
+                </label>
                 <button
                   onClick={() =>
                     handleDownload(

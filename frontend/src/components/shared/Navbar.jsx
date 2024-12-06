@@ -14,7 +14,7 @@ function Navbar() {
             </Link>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="hidden md:flex gap-2 items-center">
             <div>
               <ul className="flex gap-3">
                 <li className="font-poppins text-base hover:text-neutral-950">
@@ -24,7 +24,7 @@ function Navbar() {
                   <a href="#">Public Posts</a>
                 </li>
                 <li className="font-poppins text-base hover:text-neutral-950">
-                  <a href="">Docs</a>
+                  <Link to={"/docs"} href="">Docs</Link>
                 </li>
               </ul>
             </div>

@@ -1,5 +1,5 @@
 import { Editor } from "@monaco-editor/react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CODE_SNIPPETS } from "../../constants/constants";
 import ProceedWithCreatePostModal from "../../components/modals/ProceedWithCreatePostModal";
 import RequestLoader from "../../components/shared/RequestLoader";
@@ -8,6 +8,7 @@ import usePosts from "../../hooks/usePosts";
 import { errorNotify } from "../../utils/getNotify";
 import fileDownloader from "../../utils/fileDownloader";
 import { replace, useNavigate } from "react-router-dom";
+import { langdata } from "../../utils/langdata";
 const AddPost = () => {
   const editorRef = useRef();
   const [language, setLanguage] = useState("javascript");
@@ -20,7 +21,11 @@ const AddPost = () => {
     name: "",
     email: "",
   });
+  
+  const { createPost, isPosRequestLoading, error, isPosRequestSuccess } =
+    usePosts();
 
+  //functions
   const onMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
@@ -30,47 +35,11 @@ const AddPost = () => {
     setLanguage(language);
     setValue(CODE_SNIPPETS[language]);
   };
+  const navigate = useNavigate();
 
-  const langdata = [
-    "javascript",
-    "python",
-    "html",
-    "php",
-    "java",
-    "c",
-    "c++",
-    "c#",
-    "ruby",
-    "go",
-    "kotlin",
-    "swift",
-    "typescript",
-    "css",
-    "shell",
-    "sql",
-    "r",
-    "perl",
-    "dart",
-    "rust",
-    "scala",
-    "xml",
-    "json",
-    "yaml",
-    "markdown",
-    "txt",
-  ];
-
-  const { createPost, isPosRequestLoading, error, isPosRequestSuccess } =
-    usePosts();
-
-  const navigate = useNavigate()
-  
-
-  //functions
-
-  function handleNavigate(path){
+  function handleNavigate(path) {
     setShowModal(false);
-    navigate(path)
+    navigate(path);
   }
 
   function handleSubmit(event) {
@@ -103,6 +72,10 @@ const AddPost = () => {
         errorNotify(`${error?.message || "Failed to post"}`);
       });
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top-left corner of the page
+  }, []); // Empty dependency array ensures this runs only on mount
 
   return (
     <div>
