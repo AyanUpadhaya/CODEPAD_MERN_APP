@@ -56,6 +56,10 @@ const UpdatePost = () => {
       });
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top-left corner of the page
+  }, []); // Empty dependency array ensures this runs only on mount
+
   return (
     <div>
       <div className="overflow-hidden bg-[#26222a] p-4">
