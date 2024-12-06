@@ -9,8 +9,8 @@ const DocPostCard = ({ data }) => {
         <div className="card-body">
           <p className="text-left">{formatTimestamp(data?.timestamp)}</p>
           <p className="text-base text-neutral-900 font-poppins text-left font-bold">
-            {data?.title?.length > 30
-              ? data?.title.slice(0, 30) + "..."
+            {data?.title?.length > 100
+              ? data?.title.slice(0, 100) + "..."
               : data?.title}
           </p>
           <p className="text-left">
