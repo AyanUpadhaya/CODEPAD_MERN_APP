@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProceedWithCreatePostModal = ({ setInfo, handleSubmit }) => {
+const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
   return (
     <>
       <input type="checkbox" id="infoPopUp" className="modal-toggle" />
@@ -21,6 +21,7 @@ const ProceedWithCreatePostModal = ({ setInfo, handleSubmit }) => {
                     id="name"
                     name="name"
                     placeholder="John Doe"
+                    value={info.name}
                     required
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-neutral-900"
                     onChange={(e) =>
@@ -39,6 +40,7 @@ const ProceedWithCreatePostModal = ({ setInfo, handleSubmit }) => {
                     type="email"
                     id="email"
                     name="email"
+                    value={info.email}
                     placeholder="john@example.com"
                     required
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500  text-neutral-900"
@@ -58,6 +60,7 @@ const ProceedWithCreatePostModal = ({ setInfo, handleSubmit }) => {
                     type="text"
                     id="title"
                     name="title"
+                    value={info.title}
                     placeholder="Title here.."
                     required
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500  text-neutral-900"
@@ -74,8 +77,9 @@ const ProceedWithCreatePostModal = ({ setInfo, handleSubmit }) => {
                     About
                   </label>
                   <textarea
-                    id="message"
-                    name="message"
+                    id="about"
+                    name="about"
+                    value={info.about}
                     rows="4"
                     placeholder="About.."
                     onChange={(e) =>

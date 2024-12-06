@@ -1,6 +1,6 @@
 const fileDownloader = (data, filename, filetype) => {
   // Create a Blob object
-  const blob = new Blob([data], { type: filetype });
+  const blob = new Blob([JSON.stringify(data)], { type: filetype });
 
   // Create an anchor element and set attributes for download
   const link = document.createElement("a");
@@ -13,4 +13,4 @@ const fileDownloader = (data, filename, filetype) => {
   document.body.removeChild(link);
 };
 
-export default fileDownloader
+export default fileDownloader;

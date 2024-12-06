@@ -3,19 +3,23 @@ import React, { useRef, useState } from "react";
 import { CODE_SNIPPETS } from "../../constants/constants";
 import ProceedWithCreatePostModal from "../../components/modals/ProceedWithCreatePostModal";
 import RequestLoader from "../../components/shared/RequestLoader";
+import SuccessModal from "../../components/modals/SuccessModal";
 import usePosts from "../../hooks/usePosts";
-
+import { errorNotify } from "../../utils/getNotify";
+import fileDownloader from "../../utils/fileDownloader";
+import { replace, useNavigate } from "react-router-dom";
 const AddPost = () => {
   const editorRef = useRef();
   const [language, setLanguage] = useState("javascript");
   const [value, setValue] = useState(CODE_SNIPPETS[language]);
-  const infoObj = {
+  const [resData, setResData] = useState({} || "");
+  const [showModal, setShowModal] = useState(false);
+  const [info, setInfo] = useState({
     title: "",
     about: "",
     name: "",
     email: "",
-  };
-  const [info, setInfo] = useState(infoObj);
+  });
 
   const onMount = (editor) => {
     editorRef.current = editor;
@@ -56,7 +60,18 @@ const AddPost = () => {
     "txt",
   ];
 
-  const { createPost, loading, error, fetchPosts } = usePosts();
+  const { createPost, isPosRequestLoading, error, isPosRequestSuccess } =
+    usePosts();
+
+  const navigate = useNavigate()
+  
+
+  //functions
+
+  function handleNavigate(path){
+    setShowModal(false);
+    navigate(path)
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -68,7 +83,25 @@ const AddPost = () => {
       language: language,
       code: value,
     };
-    console.log(myData);
+    createPost(myData)
+      .then((data) => {
+        setResData(data);
+        fileDownloader(
+          data,
+          `${data?.title + ".txt" || "Sample.txt"}`,
+          `application/text`
+        );
+        setInfo({
+          title: "",
+          about: "",
+          name: "",
+          email: "",
+        });
+        setShowModal(true);
+      })
+      .catch((error) => {
+        errorNotify(`${error?.message || "Failed to post"}`);
+      });
   }
 
   return (
@@ -143,10 +176,17 @@ const AddPost = () => {
         </div>
       </div>
       <ProceedWithCreatePostModal
+        info={info}
         setInfo={setInfo}
         handleSubmit={handleSubmit}
       ></ProceedWithCreatePostModal>
-      {loading && <RequestLoader></RequestLoader>}
+      {isPosRequestLoading && <RequestLoader></RequestLoader>}
+      <SuccessModal
+        data={resData}
+        msg="Please copy the secret key"
+        isSuccess={isPosRequestSuccess && showModal}
+        handleNavigate={handleNavigate}
+      ></SuccessModal>
     </div>
   );
 };

@@ -12,7 +12,6 @@ import usePosts from "../../hooks/usePosts";
 
 const PublicPosts = () => {
   const { posts, loading, error, fetchPosts } = usePosts();
-  console.log(posts);
   const [selectedItem, setSelectedItem] = useState({});
 
   const handleDownload = (data, filename, filetype) => {
@@ -48,6 +47,9 @@ const PublicPosts = () => {
                 loop={true}
                 breakpoints={{
                   // when window width is >= 640px
+                  0: {
+                    slidesPerView: 1,
+                  },
                   640: {
                     slidesPerView: 2,
                   },
