@@ -76,5 +76,9 @@ export default {
       poppins: ["Poppins", "sans-serif"],
     },
   },
+  darkMode: "class",
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light"],
+  },
 };

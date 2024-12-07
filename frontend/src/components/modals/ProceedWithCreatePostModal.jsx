@@ -12,7 +12,7 @@ const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
                 <div className="mb-4">
                   <label
                     htmlFor="name"
-                    className="block text-gray-300 text-sm font-bold mb-2"
+                    className="block text-[#404040] text-sm font-bold mb-2"
                   >
                     Your Name
                   </label>
@@ -32,7 +32,7 @@ const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
                 <div className="mb-4">
                   <label
                     htmlFor="email"
-                    className="block text-gray-300 text-sm font-bold mb-2"
+                    className="block text-[#404040] text-sm font-bold mb-2"
                   >
                     Your Email
                   </label>
@@ -52,7 +52,7 @@ const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
                 <div className="mb-4">
                   <label
                     htmlFor="title"
-                    className="block text-gray-300 text-sm font-bold mb-2"
+                    className="block text-[#404040] text-sm font-bold mb-2"
                   >
                     Your title
                   </label>
@@ -72,7 +72,7 @@ const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
                 <div className="mb-6">
                   <label
                     htmlFor="message"
-                    className="block text-gray-300 text-sm font-bold mb-2"
+                    className="block text-[#404040] text-sm font-bold mb-2"
                   >
                     About
                   </label>

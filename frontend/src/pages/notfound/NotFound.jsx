@@ -11,11 +11,9 @@ function NotFound() {
           <div class="flex justify-center">
             <Link
               to="/"
-              class="max-w-max px-6 py-[20px] leading-none rounded-xl bg-black-800 flex justify-center items-center gap-2"
+              class="rounded-xl btn btn-error text-white  font-poppins text-xl font-normal"
             >
-              <span class="text-white btn btn-error font-mont text-xl font-normal pl-2">
-                Go Home
-              </span>
+              Go Home
             </Link>
           </div>
         </div>
