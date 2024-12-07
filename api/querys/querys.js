@@ -96,17 +96,24 @@ const findById = async (id) => {
 };
 
 const updateByIdAndSecret = async (update, id, secret) => {
-  const QUERY = `UPDATE publiccodeposts SET ? WHERE id = ? AND secret = ?`;
+  const UPDATE_QUERY = `UPDATE publiccodeposts SET ? WHERE id = ? AND secret = ?`;
   const SELECT_QUERY = `
-    SELECT id, title, about, language, code, timestamp, name, email FROM publiccodeposts WHERE id = ?;
+    SELECT id, title, about, language, code, timestamp, name, email 
+    FROM publiccodeposts WHERE id = ?;
   `;
   let client;
   try {
     client = await pool.getConnection();
-    const [result] = await client.query(QUERY, [update, id, secret]);
-    
 
-    // Fetch the newly inserted row using the insertId
+    // Execute the update query
+    const [result] = await client.query(UPDATE_QUERY, [update, id, secret]);
+
+    // Check if any rows were affected
+    if (result.affectedRows === 0) {
+      return null; // No rows updated, return null to indicate failure
+    }
+
+    // Fetch the updated row
     const [rows] = await client.query(SELECT_QUERY, [id]);
 
     return rows[0]; // Return the first (and only) row as an object

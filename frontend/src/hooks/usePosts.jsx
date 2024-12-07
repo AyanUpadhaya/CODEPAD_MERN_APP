@@ -80,10 +80,10 @@ const usePosts = () => {
       );
 
       setPosRequestSuccess(true);
-      console.log("API Response Data:", data?.data);
+
       return data?.data;
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to update post.");
+      throw new Error(err.response?.data?.message);
       console.log({ err });
     } finally {
       setIsPostUpdating(false);

@@ -6,6 +6,7 @@ import fileDownloader from "../../utils/fileDownloader";
 import ProceedWithUpdatePostModal from "../../components/modals/ProceedWithUpdatePostModal";
 import RequestLoader from "../../components/shared/RequestLoader";
 import SuccessModal from "../../components/modals/SuccessModal";
+import { errorNotify } from "../../utils/getNotify";
 
 const UpdatePost = () => {
   const [postData, setPostData] = useState({});
@@ -19,7 +20,6 @@ const UpdatePost = () => {
   const [language, setLanguage] = useState(payload?.language);
   const [value, setValue] = useState(payload?.code);
   const [resData, setResData] = useState(payload);
-  console.log(resData);
   const [showModal, setShowModal] = useState(false);
   const [info, setInfo] = useState({
     title: payload?.title || "",
@@ -39,21 +39,20 @@ const UpdatePost = () => {
     navigate(path);
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const myData = {
       ...info,
       language: language,
       code: value,
     };
-    updatePost(payload.id, myData)
-      .then((data) => {
-        setShowModal(true);
-      })
-      .catch((error) => {
-        // errorNotify(`${error?.message || "Failed to post"}`);
-        console.log(error?.message);
-      });
+    try {
+      await updatePost(payload.id, myData);
+      setShowModal(true);
+    } catch (error) {
+      errorNotify(`${error?.message || "Failed to post"}`);
+      console.log(error?.message);
+    }
   }
 
   useEffect(() => {

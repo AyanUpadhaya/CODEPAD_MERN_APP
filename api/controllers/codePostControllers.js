@@ -39,16 +39,21 @@ const getPostById = asyncHandler(async (req, res, next) => {
 
 const updatePost = asyncHandler(async (req, res, next) => {
   const { postId } = req.params;
-  const { secret } = req.body; //  `secret` from the request body
+  const { secret } = req.body; // `secret` from the request body
   const updateData = req.body; // Extract fields to update
-  const post = await findById(postId)
-  if (!secret || !post) {
-    return res
-      .status(404)
-      .json({ message: "Post not found or invalid secret !!" });
+
+  const post = await findById(postId);
+  if (!post) {
+    return res.status(404).json({ message: "Post not found!" });
   }
 
   const result = await updateByIdAndSecret(updateData, postId, secret);
+
+  if (!result) {
+    return res
+      .status(400)
+      .json({ message: "Invalid secret or no changes were made." });
+  }
 
   res.status(200).json({ message: "Post updated successfully.", data: result });
 });
