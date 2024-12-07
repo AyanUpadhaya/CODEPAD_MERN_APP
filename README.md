@@ -5,6 +5,8 @@
 
 **CodePad Editor** is an online platform for sharing code snippets effortlessly. No account creation is required—just write, share, and explore code in almost every programming language. Whether you're a developer seeking quick collaboration or a learner sharing their first snippet, CodePad makes it simple and efficient.
 
+**[CodePad Live Link](https://codepadeditor.netlify.app/)**
+
 ---
 
 ## Features
