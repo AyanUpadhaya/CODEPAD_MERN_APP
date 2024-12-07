@@ -3,7 +3,7 @@
 
 ![CodePad Editor Interface](https://iili.io/2G09egR.png)
 
-**CodePad Editor** is a modern, online platform for sharing code snippets effortlessly. No account creation is required—just write, share, and explore code in almost every programming language. Whether you're a developer seeking quick collaboration or a learner sharing their first snippet, CodePad makes it simple and efficient.
+**CodePad Editor** is an online platform for sharing code snippets effortlessly. No account creation is required—just write, share, and explore code in almost every programming language. Whether you're a developer seeking quick collaboration or a learner sharing their first snippet, CodePad makes it simple and efficient.
 
 ---
 
@@ -17,6 +17,9 @@
 
 - **Unique Security for Code Snippets**  
   Each snippet is assigned a **random security string** called `secret`. This ensures that only the creator of the snippet can edit or delete their code or related information.
+
+- **Download snippets**  
+  Download feature is available for snippets downloading.
 
 ---
 
@@ -33,22 +36,39 @@
 
 ---
 
-## How It Works
+## Screenshots
+
 
 1. **Create a Code Snippet**  
    Write your code in the language of your choice using our editor.
+   ![CodePad Editor Interface](https://iili.io/2G0ovGp.png)
 
-2. **Share with Ease**  
+2. **Fill up info and submit**  
+   To get your secret submit the required info.
+   ![CodePad Editor Interface](https://iili.io/2G0oUFI.png)
+
+3. **Receive Unique Secret Key and Download Json data**  
    Share the snippet URL with your peers or collaborators.
-
-3. **Edit or Delete with a Secret**  
-   Use the unique `secret` assigned during snippet creation to modify or remove the snippet securely.
+   ![CodePad Editor Interface](https://iili.io/2G0ogat.png)
 
 
+4. **Post detail page**  
+    Post detail page to perform CRUD Operations
+   ![CodePad Editor Interface](https://iili.io/2G0o86N.png)
 
-## Screenshot Placeholder
+5. **View code and Download**  
+    Post detail page to perform CRUD Operations
+   ![CodePad Editor Interface](https://iili.io/2G0ataf.png)
 
-![CodePad Editor Interface](https://via.placeholder.com/800x400.png?text=CodePad+Editor+Interface)
+6. **Secret Key Requires**  
+    This ensures the security of your snippet without creation of an account
+   ![CodePad Editor Interface](https://iili.io/2G0o69n.png)
+
+7. **Finally the docs**  
+    Search for code based on language
+   ![CodePad Editor Interface](https://iili.io/2G0oiwG.png)
+
+
 
 
 
