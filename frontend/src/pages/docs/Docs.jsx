@@ -42,7 +42,7 @@ const Docs = () => {
     }
   };
 
-  let content = null;
+ 
 
   const newData = [...posts]
     ?.sort(sortByTime)

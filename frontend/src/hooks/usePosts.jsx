@@ -84,7 +84,6 @@ const usePosts = () => {
       return data?.data;
     } catch (err) {
       throw new Error(err.response?.data?.message);
-      console.log({ err });
     } finally {
       setIsPostUpdating(false);
     }

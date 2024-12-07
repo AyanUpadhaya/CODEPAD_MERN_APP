@@ -51,7 +51,6 @@ const UpdatePost = () => {
       setShowModal(true);
     } catch (error) {
       errorNotify(`${error?.message || "Failed to post"}`);
-      console.log(error?.message);
     }
   }
 
