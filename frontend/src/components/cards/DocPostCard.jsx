@@ -8,12 +8,12 @@ const DocPostCard = ({ data }) => {
       <div className="card card-compact bg-base-100 w-full min-h-full shadow-xl">
         <div className="card-body">
           <p className="text-left">{formatTimestamp(data?.timestamp)}</p>
-          <p className="text-base text-neutral-900 font-poppins text-left font-bold">
-            {data?.title?.length > 100
-              ? data?.title.slice(0, 100) + "..."
+          <p className="text-base break-words text-neutral-900 font-poppins text-left font-bold">
+            {data?.title?.length > 50
+              ? data?.title.slice(0, 50) + "..."
               : data?.title}
           </p>
-          <p className="text-left">
+          <p className="text-left break-words">
             {data?.about?.length > 100
               ? data?.about.slice(0, 100) + "..."
               : data?.about}
@@ -21,7 +21,7 @@ const DocPostCard = ({ data }) => {
           <p className="text-left font-bold">
             <br />
           </p>
-          <p className="text-left font-bold">
+          <p className="text-left font-bold break-words">
             {data?.name} <br /> {data?.email}
           </p>
           <div className="card-actions justify-between">

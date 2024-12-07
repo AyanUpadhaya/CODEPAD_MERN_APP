@@ -8,20 +8,16 @@ const SinglePostCards = ({ data, setSelectedItem }) => {
       <div className="card card-compact bg-base-100 w-[500px] h-auto shadow-xl">
         <div className="card-body">
           <p className="text-left">{formatTimestamp(data?.timestamp)}</p>
-          <p className="text-base text-neutral-900 font-poppins text-left font-bold">
-            {data?.title?.length > 100
-              ? data?.title.slice(0, 100) + "..."
-              : data?.title}
+          <p className="text-base text-neutral-900 font-poppins text-left font-bold break-words">
+            {data?.title}
           </p>
-          <p className="text-left">
-            {data?.about?.length > 100
-              ? data?.about.slice(0, 100) + "..."
-              : data?.about}
+          <p className="text-left break-words">
+            {data?.about}
           </p>
           <p className="text-left font-bold">
             <br />
           </p>
-          <p className="text-left font-bold">
+          <p className="text-left font-bold break-words">
             {data?.name} <br /> {data?.email}
           </p>
           <div className="card-actions py-10">

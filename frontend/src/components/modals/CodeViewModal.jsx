@@ -24,11 +24,11 @@ const CodeViewModal = ({ modalClose, data, handleDownload }) => {
         <div className="modal-box w-11/12 max-w-full h-screen bg-[#26222a]  rounded">
           <div className="flex flex-col gap-2">
             <div className="flex flex-col md:flex-row justify-between flex-wrap gap-4">
-              <div>
-                <h2 className="font-monts text-lg font-bold text-white">
+              <div className="max-w-full md:before:max-w-[85%] break-words">
+                <h2 className="font-monts text-lg font-bold text-white break-words">
                   {data?.title}
                 </h2>
-                <p className=" font-monts text-sm text-white">{data?.about}</p>
+               
               </div>
               <div className="flex flex-wrap gap-4">
                 <label
