@@ -20,9 +20,9 @@ const Docs = () => {
   //sort by timestamp
   const sortByTime = (a, b) => {
     if (isAscending) {
-      return a.createdAt - b.createdAt;
+      return a.timestamp - b.timestamp;
     } else {
-      return b.createdAt - a.createdAt;
+      return b.timestamp - a.timestamp;
     }
   };
 
