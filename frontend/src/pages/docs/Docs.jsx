@@ -36,7 +36,7 @@ const Docs = () => {
   };
   const filterByLanguage = (data, language) => {
     if (language.trim().length > 0) {
-      return data?.language?.toLowerCase().startsWith(language?.toLowerCase());
+      return data?.language?.toLowerCase() == language?.toLowerCase();
     } else {
       return true;
     }
