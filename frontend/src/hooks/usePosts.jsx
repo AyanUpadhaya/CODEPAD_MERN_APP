@@ -78,7 +78,7 @@ const usePosts = () => {
         `${API_BASE_URL + END_POINTS["PUT"]}/${postId}`,
         updateData
       );
-     
+
       setPosRequestSuccess(true);
       console.log("API Response Data:", data?.data);
       return data?.data;
@@ -98,9 +98,8 @@ const usePosts = () => {
       await axios.delete(`${API_BASE_URL + END_POINTS["DELETE"]}/${postId}`, {
         data: { secret },
       });
-      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId)); // Remove the deleted post
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to delete post.");
+      throw new Error(err.response?.data?.message);
     } finally {
       setDeleteRequestLoading(false);
     }

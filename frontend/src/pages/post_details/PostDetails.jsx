@@ -34,19 +34,19 @@ const PostDetails = () => {
     document.body.removeChild(link);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (!secretKey) {
       errorNotify("No secret key provided");
       return;
     }
-    deletePost(params.id, secretKey)
-      .then(() => {
-        infoNotify("Post has been deleted");
-        navigate("/docs");
-      })
-      .catch((error) => {
-        console.log(`${error.message} || "Failed to delete post`);
-      });
+    try {
+      await deletePost(params.id, secretKey);
+      infoNotify("Post has been deleted");
+      navigate("/docs");
+    } catch (error) {
+      errorNotify(`${error.message}` || "Failed to delete");
+      return;
+    }
   };
 
   useEffect(() => {
