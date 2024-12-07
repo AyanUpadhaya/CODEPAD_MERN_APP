@@ -48,7 +48,7 @@
    ![CodePad Editor Interface](https://iili.io/2G0oUFI.png)
 
 3. **Receive Unique Secret Key and Download Json data**  
-   Share the snippet URL with your peers or collaborators.
+   You will receive secret key along with txt file includes json data
    ![CodePad Editor Interface](https://iili.io/2G0ogat.png)
 
 
@@ -57,7 +57,7 @@
    ![CodePad Editor Interface](https://iili.io/2G0o86N.png)
 
 5. **View code and Download**  
-    Post detail page to perform CRUD Operations
+    You can view code download it
    ![CodePad Editor Interface](https://iili.io/2G0ataf.png)
 
 6. **Secret Key Requires**  
