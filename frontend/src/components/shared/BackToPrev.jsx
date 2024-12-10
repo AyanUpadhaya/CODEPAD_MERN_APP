@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function BackToPrev({ path, title }) {
+function BackToPrev({ path, title, fontColor, svgColor }) {
   return (
     <div className="mb-6 max-w-max">
       <Link to={path} className="flex items-center gap-4">
@@ -14,10 +14,14 @@ function BackToPrev({ path, title }) {
         >
           <path
             d="M11.0782 21.3484C11.5332 20.8934 11.5332 20.1584 11.0782 19.7034L6.56323 15.1651H24.2616C24.9032 15.1651 25.4282 14.6401 25.4282 13.9984C25.4282 13.3568 24.9032 12.8318 24.2616 12.8318H6.56323L11.0899 8.3051C11.5449 7.8501 11.5449 7.1151 11.0899 6.6601C10.6349 6.2051 9.8999 6.2051 9.4449 6.6601L2.91156 13.1818C2.45656 13.6368 2.45656 14.3718 2.91156 14.8268L9.43323 21.3484C9.88823 21.7918 10.6349 21.7918 11.0782 21.3484Z"
-            fill="#303030"
+            fill={`${svgColor || "#303030"}`}
           />
         </svg>
-        <span className="text-black-900 font-bold text-xl font-sans">
+        <span
+          className={`${
+            fontColor ? [fontColor] : "text-black-900"
+          }  font-bold text-xl font-sans`}
+        >
           {title}
         </span>
       </Link>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
+const ProceedWithCreatePostModal = ({ info, handleChange, handleSubmit }) => {
   return (
     <>
       <input type="checkbox" id="infoPopUp" className="modal-toggle" />
@@ -24,9 +24,7 @@ const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
                     value={info.name}
                     required
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-neutral-900"
-                    onChange={(e) =>
-                      setInfo((prev) => ({ ...prev, name: e.target.value }))
-                    }
+                    onChange={(e) => handleChange(e, 50)}
                   />
                 </div>
                 <div className="mb-4">
@@ -44,9 +42,7 @@ const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
                     placeholder="john@example.com"
                     required
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500  text-neutral-900"
-                    onChange={(e) =>
-                      setInfo((prev) => ({ ...prev, email: e.target.value }))
-                    }
+                    onChange={(e) => handleChange(e, 50)}
                   />
                 </div>
                 <div className="mb-4">
@@ -64,9 +60,7 @@ const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
                     placeholder="Title here.."
                     required
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500  text-neutral-900"
-                    onChange={(e) =>
-                      setInfo((prev) => ({ ...prev, title: e.target.value }))
-                    }
+                    onChange={(e) => handleChange(e, 50)}
                   />
                 </div>
                 <div className="mb-6">
@@ -82,9 +76,7 @@ const ProceedWithCreatePostModal = ({ info,setInfo, handleSubmit }) => {
                     value={info.about}
                     rows="4"
                     placeholder="About.."
-                    onChange={(e) =>
-                      setInfo((prev) => ({ ...prev, about: e.target.value }))
-                    }
+                    onChange={(e)=>handleChange(e)}
                     required
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-neutral-900"
                   ></textarea>

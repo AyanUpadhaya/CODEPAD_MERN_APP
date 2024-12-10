@@ -17,7 +17,7 @@ function Navbar() {
    };
 
   return (
-    <div className="w-full bg-white border-tertiary-50 py-3 sticky top-0 left-0 text-neutral-900 shadow-md z-50">
+    <div className="w-full bg-white border-tertiary-50 py-3 px-4 sticky top-0 left-0 text-neutral-900 shadow-md z-50">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="flex gap-2 items-center justify-between">

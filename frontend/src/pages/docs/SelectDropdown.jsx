@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { usePostContext } from "../../context/PostContext";
 
 function SelectDropdown() {
   const { language, langdata, onSelect } = usePostContext();
+  const [showMenu, setShowMenu] = useState(true);
   return (
     <div className="dropdown">
       <div
         tabIndex={0}
         role="button"
+        onClick={() => setShowMenu(true)}
         className="flex gap-2 justify-around border-none px-2 py-2 font-poppins text-white bg-[#58515e] border  min-w-[130px] h-auto text-sm rounded-md text-center "
       >
         <span className="capitalize">{language}</span>
@@ -26,20 +28,25 @@ function SelectDropdown() {
           </svg>
         </span>
       </div>
-      <ul
-        tabIndex={0}
-        className="dropdown-content menu bg-[#3b373f] text-white rounded-md z-[1] w-52 max-h-80 overflow-y-scroll p-2 shadow"
-      >
-        {langdata?.map((item, idx) => (
-          <li
-            onClick={() => onSelect(item)}
-            className="cursor-pointer"
-            key={idx}
-          >
-            <a>{item}</a>
-          </li>
-        ))}
-      </ul>
+      {showMenu && (
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu bg-[#3b373f] text-white rounded-md z-[1] w-52 max-h-80 overflow-y-scroll p-2 shadow"
+        >
+          {langdata?.map((item, idx) => (
+            <li
+              onClick={() => {
+                onSelect(item);
+                setShowMenu(false);
+              }}
+              className="cursor-pointer"
+              key={idx}
+            >
+              <a>{item}</a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import formatTimestamp from "../../utils/formatTimestamp";
 
 const SinglePostCards = ({ data, setSelectedItem }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   return (
     <>
       <div className="card card-compact bg-base-100 w-[500px] h-auto shadow-xl">
@@ -34,6 +35,7 @@ const SinglePostCards = ({ data, setSelectedItem }) => {
                   state: {
                     payload: data,
                     type: "edit",
+                    previousPath:location.pathname
                   },
                 })
               }
