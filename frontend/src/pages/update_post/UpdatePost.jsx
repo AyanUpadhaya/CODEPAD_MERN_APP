@@ -2,17 +2,18 @@ import { Editor } from "@monaco-editor/react";
 import React, { useEffect, useRef, useState } from "react";
 import usePosts from "../../hooks/usePosts";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import fileDownloader from "../../utils/fileDownloader";
 import ProceedWithUpdatePostModal from "../../components/modals/ProceedWithUpdatePostModal";
 import RequestLoader from "../../components/shared/RequestLoader";
 import SuccessModal from "../../components/modals/SuccessModal";
 import { errorNotify } from "../../utils/getNotify";
+import { usePostContext } from "../../context/PostContext";
+
 
 const UpdatePost = () => {
+  const { handlePostUpadate } = usePostContext();
   const [postData, setPostData] = useState({});
   const navigate = useNavigate();
-  const { loading, error, updatePost, isPostUpdating, isPosRequestSuccess } =
-    usePosts();
+  const { updatePost, isPostUpdating, isPosRequestSuccess } = usePosts();
   const { state } = useLocation();
   const { payload, type } = state || {};
 
@@ -28,7 +29,7 @@ const UpdatePost = () => {
     email: payload?.email || "",
     secret: "",
   });
-
+  const { handleNewPost, invalidateCache } = usePostContext();
   const onMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
@@ -48,6 +49,8 @@ const UpdatePost = () => {
     };
     try {
       await updatePost(payload.id, myData);
+      handlePostUpadate(payload.id, myData);
+      invalidateCache();
       setShowModal(true);
     } catch (error) {
       errorNotify(`${error?.message || "Failed to post"}`);

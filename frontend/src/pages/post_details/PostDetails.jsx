@@ -10,49 +10,71 @@ import ConfirmationModal from "../../components/modals/ConfirmationModal";
 import { errorNotify, infoNotify } from "../../utils/getNotify";
 import RequestLoader from "../../components/shared/RequestLoader";
 import BackToPrev from "../../components/shared/BackToPrev";
+import useGetCachedPost from "./useGetCachedPost";
+import { usePostContext } from "../../context/PostContext";
+
 const PostDetails = () => {
   const params = useParams();
-  const { loading, error, getPostById, deletePost, isDeleteRequestLoading } =
-    usePosts();
+
+  const filteredData = useGetCachedPost(params?.id);
+  const {
+    singlePostError,
+    getPostById,
+    deletePost,
+    isDeleteRequestLoading,
+    setCachedPost,
+    invalidateCache,
+    handleDeletePost,
+  } = usePostContext();
   const [postData, setPostData] = useState({});
   const [selectedItem, setSelectedItem] = useState({});
   const [secretKey, setSecertKey] = useState("");
   const navigate = useNavigate();
+  const [isPending, setIsPending] = useState(false);
 
-  const handleDownload = (data, filename, filetype) => {
-    // Create a Blob object
-    const blob = new Blob([data], { type: filetype });
-
-    // Create an anchor element and set attributes for download
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-
-    // Append to the document body, trigger click, and remove
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (!secretKey) {
       errorNotify("No secret key provided");
       return;
     }
-    try {
-      await deletePost(params.id, secretKey);
-      infoNotify("Post has been deleted");
-      navigate("/docs");
-    } catch (error) {
-      errorNotify(`${error.message}` || "Failed to delete");
-      return;
-    }
+
+    deletePost(params.id, secretKey)
+      .then((data) => {
+        handleDeletePost(params.id);
+        invalidateCache();
+        infoNotify("Post has been deleted");
+        navigate("/docs");
+      })
+      .catch((error) => {
+        errorNotify(`${error?.message || "Failed to post"}`);
+      });
   };
 
+  function checkDataExist(id) {
+    if (filteredData) {
+      setPostData(filteredData);
+    } else {
+      setIsPending(true);
+      getPostById(id)
+        .then((data) => {
+          setPostData(data);
+          if (data.id) {
+            setCachedPost((prev) => {
+              if (prev.find((item) => item.id === data.id)) {
+                return prev; // If already exists, return as is
+              }
+              return [...prev, data];
+            });
+          }
+        })
+        .catch((err) => console.log("Error occured:", error))
+        .finally(() => {
+          setIsPending(false);
+        });
+    }
+  }
   useEffect(() => {
-    getPostById(params.id)
-      .then((data) => setPostData(data))
-      .catch((err) => console.log("Error occured:", error));
+    checkDataExist(params.id);
     window.scrollTo(0, 0);
   }, []);
 
@@ -62,10 +84,10 @@ const PostDetails = () => {
         <BackToPrev path={"/docs"} title={"Back"}></BackToPrev>
       </div>
       <div className="flex justify-center items-center">
-        <If condition={loading}>
+        <If condition={isPending}>
           <Then>{() => <SearchLoader></SearchLoader>}</Then>
           <Else>
-            <If condition={error}>
+            <If condition={singlePostError}>
               <Then>
                 <NoData></NoData>
               </Then>
@@ -80,10 +102,7 @@ const PostDetails = () => {
             </If>
           </Else>
         </If>
-        <CodeViewModal
-          handleDownload={handleDownload}
-          data={selectedItem}
-        ></CodeViewModal>
+        <CodeViewModal data={selectedItem}></CodeViewModal>
         <ConfirmationModal
           onChange={(e) => setSecertKey(e.target.value)}
           handleDelete={handleDelete}

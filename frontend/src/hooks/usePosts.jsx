@@ -9,8 +9,10 @@ const usePosts = () => {
   const [isPostUpdating, setIsPostUpdating] = useState(false); // Loading state
   const [isPosRequestSuccess, setPosRequestSuccess] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
+  const [singlePostError, setSinglePostError] = useState(null); // Error state
 
-  const API_BASE_URL = import.meta.env.VITE_BASE_URL; // Replace with your API URL
+  const API_BASE_URL = import.meta.env.VITE_BASE_URL;
+
   const END_POINTS = {
     POST: "/posts/add",
     GET: "/posts",
@@ -24,14 +26,14 @@ const usePosts = () => {
     setLoading(true);
     setError(null);
     try {
-      const { data } = await axios.get(API_BASE_URL + END_POINTS["GET"]);
+      const { data } = await axios.get(`${API_BASE_URL}${END_POINTS["GET"]}`);
       setPosts(data);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch posts.");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [API_BASE_URL, END_POINTS["GET"]]);
 
   // Create a new post
   const createPost = async (postData) => {
@@ -39,30 +41,31 @@ const usePosts = () => {
     setError(null);
     try {
       const { data } = await axios.post(
-        API_BASE_URL + END_POINTS["POST"],
+        `${API_BASE_URL}${END_POINTS["POST"]}`,
         postData
       );
-      setPosts((prevPosts) => [...prevPosts, data.data]); // Append the new post
+
       setPosRequestSuccess(true);
       return data?.data;
     } catch (err) {
       setError(err.response?.data?.message || "Failed to create post.");
     } finally {
       setPosRequestLoading(false);
+      await fetchPosts(); // Refetch posts after addition
     }
   };
 
   // Get a single post by ID
   const getPostById = async (postId) => {
     setLoading(true);
-    setError(null);
+    setSinglePostError(null);
     try {
       const { data } = await axios.get(
         `${API_BASE_URL + END_POINTS["GET_SINGLE"]}/${postId}`
       );
       return data; // Return the post data
     } catch (err) {
-      setError(err.response?.data?.message || "Post not found.");
+      setSinglePostError(err.response?.data?.message || "Post not found.");
       return null;
     } finally {
       setLoading(false);
@@ -78,7 +81,6 @@ const usePosts = () => {
         `${API_BASE_URL + END_POINTS["PUT"]}/${postId}`,
         updateData
       );
-
       setPosRequestSuccess(true);
 
       return data?.data;
@@ -103,7 +105,6 @@ const usePosts = () => {
       setDeleteRequestLoading(false);
     }
   };
-
   // Automatically fetch posts when the hook is used
   useEffect(() => {
     fetchPosts();
@@ -112,11 +113,13 @@ const usePosts = () => {
   return {
     posts,
     loading,
+    error,
+    singlePostError,
     isPosRequestLoading,
     isPosRequestSuccess,
     isDeleteRequestLoading,
     isPostUpdating,
-    error,
+    setPosts,
     fetchPosts,
     createPost,
     getPostById,

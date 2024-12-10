@@ -2,7 +2,7 @@ import { editor } from "../../assets/getAssets";
 
 const Header = () => {
   return (
-    <div className="h-screen overflow-hidden bg-gradient-to-b from-[#220432e4] to-[#220432] ">
+    <div className="sm:h-screen overflow-hidden bg-gradient-to-b from-[#220432e4] to-[#220432] ">
       <div className="max-w-[1200px] mx-auto h-full flex flex-col justify-between items-center">
         <div className="py-5 flex flex-col gap-5 text-center">
           <h2 className="text-white font-poppins font-bold text-5xl">
@@ -17,7 +17,7 @@ const Header = () => {
             </button>
           </p>
         </div>
-        <div className="flex-1 -mb-[20vh] w-full relative border-5 border-gray-500 rounded-md p-4">
+        <div className="hidden sm:block flex-1 -mb-[20vh] w-full relative border-5 border-gray-500 rounded-md p-4">
           <img
             src={editor}
             className="absolute inset-0 mx-auto h-full object-cover object-left-top"

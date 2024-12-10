@@ -9,6 +9,7 @@ import { errorNotify } from "../../utils/getNotify";
 import fileDownloader from "../../utils/fileDownloader";
 import { replace, useNavigate } from "react-router-dom";
 import { langdata } from "../../utils/langdata";
+import { usePostContext } from "../../context/PostContext";
 const AddPost = () => {
   const editorRef = useRef();
   const [language, setLanguage] = useState("javascript");
@@ -21,7 +22,9 @@ const AddPost = () => {
     name: "",
     email: "",
   });
-  
+
+  const { handleNewPost, invalidateCache } = usePostContext();
+
   const { createPost, isPosRequestLoading, error, isPosRequestSuccess } =
     usePosts();
 
@@ -55,6 +58,7 @@ const AddPost = () => {
     createPost(myData)
       .then((data) => {
         setResData(data);
+        handleNewPost(data);
         fileDownloader(
           data,
           `${data?.title + ".txt" || "Sample.txt"}`,
@@ -67,10 +71,9 @@ const AddPost = () => {
           email: "",
         });
         setShowModal(true);
+        invalidateCache();
       })
-      .catch((error) => {
-        errorNotify(`${error?.message || "Failed to post"}`);
-      });
+      
   }
 
   useEffect(() => {

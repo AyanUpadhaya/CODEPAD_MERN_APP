@@ -3,10 +3,25 @@ import { useEffect, useRef, useState } from "react";
 import { CODE_SNIPPETS } from "../../constants/constants";
 import getExtension from "../../utils/getExtension";
 
-const CodeViewModal = ({ modalClose, data, handleDownload }) => {
+const CodeViewModal = ({ modalClose={}, data}) => {
   const editorRef = useRef();
   const [value, setValue] = useState(data?.code || "");
   const [language, setLanguage] = useState("javascript");
+
+   const handleDownload = (data, filename, filetype) => {
+     // Create a Blob object
+     const blob = new Blob([data], { type: filetype });
+
+     // Create an anchor element and set attributes for download
+     const link = document.createElement("a");
+     link.href = URL.createObjectURL(blob);
+     link.download = filename;
+
+     // Append to the document body, trigger click, and remove
+     document.body.appendChild(link);
+     link.click();
+     document.body.removeChild(link);
+   };
 
 
   const onMount = (editor) => {
