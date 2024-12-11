@@ -17,11 +17,14 @@ export default function PostContextProvider({ children }) {
     setPosts,
     error,
     singlePostError,
+    singlePostDeleteError,
+    singlePostUpdateError,
     loading,
     fetchPosts,
     getPostById,
     deletePost,
     isDeleteRequestLoading,
+    isPosRequestLoading,
   } = usePosts();
   const [language, setLanguage] = useState("javascript");
   const [searchValue, setSearchValue] = useState("");
@@ -90,6 +93,7 @@ export default function PostContextProvider({ children }) {
     getPostById,
     deletePost,
     isDeleteRequestLoading,
+    isPosRequestLoading,
     handleNewPost,
     invalidateCache,
     handleDeletePost,

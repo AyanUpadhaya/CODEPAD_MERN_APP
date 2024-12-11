@@ -110,7 +110,7 @@ const AddPost = () => {
 
   return (
     <div>
-      <div className="overflow-hidden bg-[#26222a] p-4">
+      <div className="h-screen overflow-hidden bg-[#26222a] px-4">
         <div className="max-w-[1200px] mx-auto h-full">
           <div className="flex gap-2 flex-wrap justify-between items-center py-5">
             <div>
@@ -229,7 +229,9 @@ const AddPost = () => {
         info={info}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        isPosRequestLoading={isPosRequestLoading}
       ></ProceedWithCreatePostModal>
+
       {isPosRequestLoading && <RequestLoader></RequestLoader>}
       <SuccessModal
         data={resData}

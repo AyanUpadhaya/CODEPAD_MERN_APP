@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function BackToPrev({ path, title, fontColor, svgColor }) {
+function BackToPrev({ path, title, fontColor, svgColor, className }) {
   return (
-    <div className="mb-6 max-w-max">
-      <Link to={path} className="flex items-center gap-4">
+    <div className={`mb-6 max-w-max  h-full ${className}`}>
+      <Link to={path} className={`flex items-center gap-4`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="28"

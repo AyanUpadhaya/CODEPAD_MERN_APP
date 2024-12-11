@@ -10,6 +10,8 @@ const usePosts = () => {
   const [isPosRequestSuccess, setPosRequestSuccess] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
   const [singlePostError, setSinglePostError] = useState(null); // Error state
+  const [singlePostDeleteError, setSinglePostDeleteError] = useState(null); // Error state
+  const [singlePostUpdateError, setSinglePostUpdateError] = useState(null); // Error state
 
   const API_BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -18,7 +20,7 @@ const usePosts = () => {
   });
 
   const END_POINTS = {
-    POST: "/posts/adds",
+    POST: "/posts/add",
     GET: "/posts",
     GET_SINGLE: "/posts", //requires post id afterwards
     PUT: "/posts", //requires post id afterwards
@@ -26,15 +28,8 @@ const usePosts = () => {
   };
 
   function getErrorMessage(err) {
-    if (err.code == "ERR_BAD_REQUEST") {
-      return "Invalid api endpoint";
-    } else {
-      return (
-        err.response?.data?.message || err.message || "Something went wrong"
-      );
-    }
+    return err.response?.data?.message || err.message || "Something went wrong";
   }
-
 
   // Fetch all posts
   const fetchPosts = useCallback(async () => {
@@ -76,9 +71,7 @@ const usePosts = () => {
     setLoading(true);
     setSinglePostError(null);
     try {
-      const { data } = await api.get(
-        `${END_POINTS["GET_SINGLE"]}/${postId}`
-      );
+      const { data } = await api.get(`${END_POINTS["GET_SINGLE"]}/${postId}`);
       return data; // Return the post data
     } catch (err) {
       let message = getErrorMessage(err);
@@ -93,7 +86,7 @@ const usePosts = () => {
   // Update a post by ID and secret
   const updatePost = async (postId, updateData) => {
     setIsPostUpdating(true);
-    setError(null);
+    setSinglePostUpdateError(null);
     try {
       const { data } = await api.put(
         `${END_POINTS["PUT"]}/${postId}`,
@@ -103,7 +96,7 @@ const usePosts = () => {
       return data?.data;
     } catch (err) {
       let message = getErrorMessage(err);
-      setError(message);
+      setSinglePostUpdateError(message);
       throw new Error(message);
     } finally {
       setIsPostUpdating(false);
@@ -113,17 +106,18 @@ const usePosts = () => {
   // Delete a post by ID and secret
   const deletePost = async (postId, secret) => {
     setDeleteRequestLoading(true);
-    setError(null);
+    setSinglePostDeleteError(null);
     try {
       await api.delete(`${END_POINTS["DELETE"]}/${postId}`, {
         data: { secret },
       });
     } catch (err) {
       let message = getErrorMessage(err);
-      setError(message);
+      setSinglePostDeleteError(message);
       throw new Error(message);
     } finally {
       setDeleteRequestLoading(false);
+      setSinglePostDeleteError(null);
     }
   };
 
@@ -132,6 +126,8 @@ const usePosts = () => {
     loading,
     error,
     singlePostError,
+    singlePostDeleteError,
+    singlePostUpdateError,
     isPosRequestLoading,
     isPosRequestSuccess,
     isDeleteRequestLoading,

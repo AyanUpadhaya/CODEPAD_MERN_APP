@@ -1,11 +1,16 @@
 import React from "react";
 
-const ProceedWithCreatePostModal = ({ info, handleChange, handleSubmit }) => {
+const ProceedWithCreatePostModal = ({
+  info,
+  handleChange,
+  handleSubmit,
+  isPosRequestLoading,
+}) => {
   return (
     <>
       <input type="checkbox" id="infoPopUp" className="modal-toggle" />
       <div className="modal px-6" role="dialog">
-        <div className="modal-box w-[640px] max-w-1/2 h-auto bg-white rounded-md">
+        <div className="modal-box w-full max-w-[640px] bg-neutral-50   h-auto rounded-md">
           <div>
             <div className="modal-body">
               <form onSubmit={handleSubmit}>
@@ -76,13 +81,14 @@ const ProceedWithCreatePostModal = ({ info, handleChange, handleSubmit }) => {
                     value={info.about}
                     rows="4"
                     placeholder="About.."
-                    onChange={(e)=>handleChange(e)}
+                    onChange={(e) => handleChange(e)}
                     required
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-neutral-900"
                   ></textarea>
                 </div>
                 <div className="flex gap-2">
                   <button
+                    disabled={isPosRequestLoading}
                     type="submit"
                     className=" text-white px-4 py-2 rounded-md bg-blue-600 focus:outline-none"
                   >

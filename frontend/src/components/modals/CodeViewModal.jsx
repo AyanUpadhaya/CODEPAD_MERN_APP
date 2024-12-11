@@ -39,7 +39,7 @@ const CodeViewModal = ({ modalClose = {}, data }) => {
       <div className="modal px-6" role="dialog">
         <div className="modal-box w-11/12 max-w-full py-2 h-screen bg-[#26222a]  rounded">
           <div className="flex flex-col gap-2">
-            <div className="flex flex-col md:flex-row justify-between flex-wrap gap-4">
+            <div className="flex justify-between items-center flex-wrap gap-4">
               <div className="max-w-full md:before:max-w-[85%] break-words">
                 <h2 className="font-monts text-lg font-bold text-white break-words">
                   {data?.title}
