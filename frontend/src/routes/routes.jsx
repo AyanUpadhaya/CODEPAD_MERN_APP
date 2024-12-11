@@ -6,7 +6,7 @@ import PostDetails from "../pages/post_details/PostDetails";
 import AddPost from "../pages/add_post/AddPost";
 import UpdatePost from "../pages/update_post/UpdatePost";
 import Docs from "../pages/docs/Docs";
-
+import CodeViewMobile from "../components/mobile/codeview/CodeViewMobile";
 
 const routes = createBrowserRouter([
   {
@@ -32,6 +32,10 @@ const routes = createBrowserRouter([
       {
         path: "/docs",
         element: <Docs></Docs>,
+      },
+      {
+        path: "/view-mobile",
+        element: <CodeViewMobile></CodeViewMobile>,
       },
     ],
   },

@@ -5,7 +5,7 @@ import { code } from '../../assets/getAssets';
 const Footer = () => {
   return (
     <div>
-      <div className="w-full bg-white border-tertiary-50 py-3  text-neutral-900 shadow-md ">
+      <div className="w-full bg-white border-tertiary-50 py-3 px-4  text-neutral-900 shadow-md ">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex flex-wrap gap-2 items-center justify-between">
             <Link to={"/"} className="flex gap-1 items-center">

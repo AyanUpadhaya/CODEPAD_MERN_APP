@@ -67,7 +67,9 @@ export default function PostContextProvider({ children }) {
 
   useEffect(() => {
     if (posts.length === 0) {
-      fetchPosts();
+      fetchPosts().catch((err) => {
+        console.log(err);
+      });
     }
   }, [fetchPosts, posts.length]);
 

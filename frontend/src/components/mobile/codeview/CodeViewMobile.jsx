@@ -1,54 +1,43 @@
 import { Editor } from "@monaco-editor/react";
 import { useEffect, useRef, useState } from "react";
-import { CODE_SNIPPETS } from "../../constants/constants";
-import getExtension from "../../utils/getExtension";
-import { fileDownloader } from "../../utils/helpers";
+import { CODE_SNIPPETS } from "../../../constants/constants";
+import getExtension from "../../../utils/getExtension";
+import { fileDownloader } from "../../../utils/helpers";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const CodeViewModal = ({ modalClose = {}, data }) => {
+const CodeViewMobile = () => {
+  const { state } = useLocation();
+  const { payload, previousPath } = state || {};
+  const navigate = useNavigate();
   const editorRef = useRef();
-  const [value, setValue] = useState(data?.code || "");
-  const [language, setLanguage] = useState("javascript");
-
-  const handleDownload = (data, filename, filetype) => {
-    // Create a Blob object
-    const blob = new Blob([data], { type: filetype });
-
-    // Create an anchor element and set attributes for download
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-
-    // Append to the document body, trigger click, and remove
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  const [value, setValue] = useState(payload?.code || "");
+  const [language, setLanguage] = useState(payload?.language);
 
   const onMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
   };
+
+  // Scroll to the top-left corner of the page
   useEffect(() => {
-    setValue(data?.code);
-    setLanguage(data?.language);
-  }, [data?.code]);
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
-      <input type="checkbox" id="codeViewPopUp" className="modal-toggle" />
-      <div className="modal px-6" role="dialog">
-        <div className="modal-box w-11/12 max-w-full py-2 h-screen bg-[#26222a]  rounded">
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col md:flex-row justify-between flex-wrap gap-4">
+      <div>
+        <div className="max-w-full py-2 h-screen overflow-hidden bg-[#26222a] ">
+          <div className="flex flex-col gap-2 py-4">
+            <div className="flex gap-2 flex-wrap justify-between items-center px-4">
               <div className="max-w-full md:before:max-w-[85%] break-words">
                 <h2 className="font-monts text-lg font-bold text-white break-words">
-                  {data?.title}
+                  {payload?.title}
                 </h2>
               </div>
-              <div className="flex flex-row-reverse flex-wrap gap-4">
+              <div className="flex flex-row-reverse flex-wrap gap-2">
                 {/* close */}
-                <label
-                  htmlFor="codeViewPopUp"
+                <button
+                  onClick={() => navigate(previousPath || "/")}
                   className="text-center cursor-pointer flex flex-col justify-center items-center  px-2 py-2 font-poppins text-white bg-red-500 hover:bg-red-500  max-w-max  text-sm rounded-md"
                 >
                   <svg
@@ -69,14 +58,14 @@ const CodeViewModal = ({ modalClose = {}, data }) => {
                       fill="#fff"
                     />
                   </svg>
-                </label>
+                </button>
                 {/* download */}
                 <button
                   onClick={() =>
                     fileDownloader(
-                      data?.code,
-                      `${data?.title}.${getExtension(data?.language)}`,
-                      `application/${data?.language}`
+                      payload?.code,
+                      `${payload?.title}.${getExtension(payload?.language)}`,
+                      `application/${payload?.language}`
                     )
                   }
                   className="flex justify-center max-w-max border-none px-2 py-2 font-poppins text-white bg-[#367EE2] hover:bg-[#367EE2]   h-auto text-sm rounded-md"
@@ -99,14 +88,14 @@ const CodeViewModal = ({ modalClose = {}, data }) => {
                 </button>
               </div>
             </div>
-            <div>
+            <div className="px-4">
               <Editor
                 options={{
                   minimap: {
                     enabled: false,
                   },
                 }}
-                height="75vh"
+                height="100vh"
                 theme="vs-dark"
                 language={language}
                 defaultValue={CODE_SNIPPETS[language]}
@@ -117,15 +106,9 @@ const CodeViewModal = ({ modalClose = {}, data }) => {
             </div>
           </div>
         </div>
-        <label
-          className="modal-backdrop cursor-pointer"
-          htmlFor="codeViewPopUp"
-        >
-          Close
-        </label>
       </div>
     </>
   );
 };
 
-export default CodeViewModal;
+export default CodeViewMobile;

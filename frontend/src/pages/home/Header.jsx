@@ -1,8 +1,8 @@
 import { editor } from "../../assets/getAssets";
 
-const Header = () => {
+const Header = ({ navigate }) => {
   return (
-    <div className="sm:h-screen overflow-hidden bg-gradient-to-b from-[#220432e4] to-[#220432] px-4 ">
+    <div className="sm:h-screen overflow-hidden bg-gradient-to-b from-[#220432e4] to-[#220432] px-4 py-10 sm:py-0 ">
       <div className="max-w-[1200px] mx-auto h-full flex flex-col justify-between items-center">
         <div className="py-5 flex flex-col gap-5 text-center">
           <h2 className="text-white font-poppins font-bold text-5xl">
@@ -12,7 +12,10 @@ const Header = () => {
             Build and share your code
           </p>
           <p>
-            <button className="btn px-2 py-2 font-poppins text-white hover:text-neutral-800 bg-neutral-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-md">
+            <button
+              onClick={() => navigate("/add_post")}
+              className="btn px-2 py-2 font-poppins text-white hover:text-neutral-800 bg-neutral-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-md"
+            >
               Get Started
             </button>
           </p>

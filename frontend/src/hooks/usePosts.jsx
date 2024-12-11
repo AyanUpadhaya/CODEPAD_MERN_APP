@@ -13,23 +13,40 @@ const usePosts = () => {
 
   const API_BASE_URL = import.meta.env.VITE_BASE_URL;
 
+  const api = axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL,
+  });
+
   const END_POINTS = {
-    POST: "/posts/add",
+    POST: "/posts/adds",
     GET: "/posts",
     GET_SINGLE: "/posts", //requires post id afterwards
     PUT: "/posts", //requires post id afterwards
     DELETE: "/posts", //requires post id afterwards
   };
 
+  function getErrorMessage(err) {
+    if (err.code == "ERR_BAD_REQUEST") {
+      return "Invalid api endpoint";
+    } else {
+      return (
+        err.response?.data?.message || err.message || "Something went wrong"
+      );
+    }
+  }
+
+
   // Fetch all posts
   const fetchPosts = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const { data } = await axios.get(`${API_BASE_URL}${END_POINTS["GET"]}`);
+      const { data } = await api.get(END_POINTS["GET"]);
       setPosts(data);
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to fetch posts.");
+      let message = getErrorMessage(err);
+      setError(message);
+      throw new Error(message);
     } finally {
       setLoading(false);
     }
@@ -40,18 +57,17 @@ const usePosts = () => {
     setPosRequestLoading(true);
     setError(null);
     try {
-      const { data } = await axios.post(
-        `${API_BASE_URL}${END_POINTS["POST"]}`,
-        postData
-      );
+      const { data } = await api.post(END_POINTS["POST"], postData);
 
       setPosRequestSuccess(true);
       return data?.data;
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to create post.");
+      let message = getErrorMessage(err);
+      setError(message);
+      throw new Error(message);
     } finally {
       setPosRequestLoading(false);
-      await fetchPosts(); // Refetch posts after addition
+      //await fetchPosts(); // Refetch posts after addition
     }
   };
 
@@ -60,12 +76,14 @@ const usePosts = () => {
     setLoading(true);
     setSinglePostError(null);
     try {
-      const { data } = await axios.get(
-        `${API_BASE_URL + END_POINTS["GET_SINGLE"]}/${postId}`
+      const { data } = await api.get(
+        `${END_POINTS["GET_SINGLE"]}/${postId}`
       );
       return data; // Return the post data
     } catch (err) {
-      setSinglePostError(err.response?.data?.message || "Post not found.");
+      let message = getErrorMessage(err);
+      setError(message);
+      throw new Error(message);
       return null;
     } finally {
       setLoading(false);
@@ -77,15 +95,16 @@ const usePosts = () => {
     setIsPostUpdating(true);
     setError(null);
     try {
-      const { data } = await axios.put(
-        `${API_BASE_URL + END_POINTS["PUT"]}/${postId}`,
+      const { data } = await api.put(
+        `${END_POINTS["PUT"]}/${postId}`,
         updateData
       );
       setPosRequestSuccess(true);
-
       return data?.data;
     } catch (err) {
-      throw new Error(err.response?.data?.message);
+      let message = getErrorMessage(err);
+      setError(message);
+      throw new Error(message);
     } finally {
       setIsPostUpdating(false);
     }
@@ -96,19 +115,17 @@ const usePosts = () => {
     setDeleteRequestLoading(true);
     setError(null);
     try {
-      await axios.delete(`${API_BASE_URL + END_POINTS["DELETE"]}/${postId}`, {
+      await api.delete(`${END_POINTS["DELETE"]}/${postId}`, {
         data: { secret },
       });
     } catch (err) {
-      throw new Error(err.response?.data?.message);
+      let message = getErrorMessage(err);
+      setError(message);
+      throw new Error(message);
     } finally {
       setDeleteRequestLoading(false);
     }
   };
-  // Automatically fetch posts when the hook is used
-  useEffect(() => {
-    fetchPosts();
-  }, [fetchPosts]);
 
   return {
     posts,

@@ -1,6 +1,6 @@
 import formatTimestamp from "../../utils/formatTimestamp";
 
-const PublicPostCard = ({ data, setSelectedItem }) => {
+const PublicPostCard = ({ data, setSelectedItem, handleNavigate }) => {
   return (
     <>
       <div className="card card-compact bg-base-100 w-96 min-h-full shadow-xl">
@@ -26,10 +26,17 @@ const PublicPostCard = ({ data, setSelectedItem }) => {
             <label
               htmlFor="codeViewPopUp"
               onClick={() => setSelectedItem(data)}
-              className="text-center cursor-pointer p-1 font-poppins text-white hover:text-neutral-800 bg-neutral-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-badge"
+              className="hidden sm:block text-center cursor-pointer p-1 font-poppins text-white hover:text-neutral-800 bg-neutral-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-badge"
             >
               View Code
             </label>
+            <button
+              htmlFor="codeViewPopUp"
+              onClick={() => handleNavigate("/view-mobile",data)}
+              className="sm:hidden text-center cursor-pointer p-1 font-poppins text-white hover:text-neutral-800 bg-neutral-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-badge"
+            >
+              View Code
+            </button>
           </div>
         </div>
       </div>

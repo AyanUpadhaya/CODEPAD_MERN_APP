@@ -7,10 +7,13 @@ import { useState } from "react";
 import { If, Then, Else } from "react-if";
 import NoData from "../../components/shared/NoData";
 import SearchLoader from "../../components/shared/SearchLoader";
-import usePosts from "../../hooks/usePosts";
+import { usePostContext } from "../../context/PostContext";
+import { useLocation, useNavigate } from "react-router-dom";
+// import usePosts from "../../hooks/usePosts";
 
-const PublicPosts = () => {
-  const { posts, loading, error, fetchPosts } = usePosts();
+const PublicPosts = ({ navigate }) => {
+  const { posts, loading, error } = usePostContext();
+
   const [selectedItem, setSelectedItem] = useState({});
 
   const handleDownload = (data, filename, filetype) => {
@@ -26,6 +29,18 @@ const PublicPosts = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const location = useLocation();
+
+  const handleNavigate = (path, data) => {
+    navigate(`${path}`, {
+      state: {
+        payload: data,
+        type: "view",
+        previousPath: location.pathname,
+      },
+    });
   };
 
   //we check first if loading then we check for empty posts or error
@@ -70,6 +85,7 @@ const PublicPosts = () => {
                       <PublicPostCard
                         setSelectedItem={setSelectedItem}
                         data={item}
+                        handleNavigate={handleNavigate}
                       ></PublicPostCard>
                     </SwiperSlide>
                   ))}
@@ -83,7 +99,7 @@ const PublicPosts = () => {
   );
 
   return (
-    <div id="trending" className="bg-base-200 py-10 ">
+    <div id="trending" className="bg-base-200 sm:py-10 px-4">
       <div className="max-w-[1200px] mx-auto h-full flex flex-col justify-between items-center">
         <div className="py-5 flex flex-col gap-2 md:gap-5 ">
           <h2 className="text-neutral-950 font-poppins font-normal text-2xl sm:text-4xl md:text-6xl text-center">
