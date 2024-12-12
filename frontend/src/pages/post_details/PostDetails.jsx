@@ -1,12 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import NoData from "../../components/shared/NoData";
-import usePosts from "../../hooks/usePosts";
 import { If, Then, Else } from "react-if";
 import { useEffect, useState } from "react";
 import SinglePostCards from "../../components/cards/SinglePostCards";
 import SearchLoader from "../../components/shared/SearchLoader";
-import CodeViewModal from "../../components/modals/CodeViewModal";
-import ConfirmationModal from "../../components/modals/ConfirmationModal";
+import { CodeViewModal, ConfirmationModal } from "../../components/modals";
 import { errorNotify, infoNotify } from "../../utils/getNotify";
 import RequestLoader from "../../components/shared/RequestLoader";
 import BackToPrev from "../../components/shared/BackToPrev";
@@ -97,8 +95,11 @@ const PostDetails = () => {
           handleDelete={handleDelete}
         ></ConfirmationModal>
       </div>
-
-      {isDeleteRequestLoading && <RequestLoader></RequestLoader>}
+      <If condition={isDeleteRequestLoading}>
+        <Then>
+          <RequestLoader></RequestLoader>
+        </Then>
+      </If>
     </div>
   );
 };

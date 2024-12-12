@@ -1,16 +1,19 @@
 import { Editor } from "@monaco-editor/react";
 import React, { useEffect, useRef, useState } from "react";
 import { CODE_SNIPPETS } from "../../constants/constants";
-import ProceedWithCreatePostModal from "../../components/modals/ProceedWithCreatePostModal";
+import {
+  ProceedWithCreatePostModal,
+  SuccessModal,
+} from "../../components/modals";
 import RequestLoader from "../../components/shared/RequestLoader";
-import SuccessModal from "../../components/modals/SuccessModal";
+
 import usePosts from "../../hooks/usePosts";
 import { errorNotify } from "../../utils/getNotify";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { langdata } from "../../utils/langdata";
 import { usePostContext } from "../../context/PostContextProvider";
 import { fileDownloader, validateEmail } from "../../utils/helpers";
-
+import SelectDropdown from "../../components/shared/SelectDropdown";
 
 const AddPost = () => {
   const editorRef = useRef();
@@ -18,7 +21,6 @@ const AddPost = () => {
   const [value, setValue] = useState(CODE_SNIPPETS[language]);
   const [resData, setResData] = useState({} || "");
   const [showModal, setShowModal] = useState(false);
-  const [showMenu, setShowMenu] = useState(true);
   const [info, setInfo] = useState({
     title: "",
     about: "",
@@ -112,49 +114,11 @@ const AddPost = () => {
         <div className="max-w-[1200px] mx-auto h-full">
           <div className="flex gap-2 flex-wrap justify-between items-center py-5">
             <div>
-              <div className="dropdown">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  onClick={() => setShowMenu(true)}
-                  className="flex gap-2 justify-around border-none px-2 py-2 font-poppins text-white bg-[#58515e] border  min-w-[130px] h-auto text-sm rounded-md text-center "
-                >
-                  <span className="capitalize">{language}</span>
-
-                  <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      className="rotate-90"
-                    >
-                      <path
-                        d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"
-                        fill="#fff"
-                      />
-                    </svg>
-                  </span>
-                </div>
-                {showMenu && (
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content menu bg-[#3b373f] text-white rounded-md z-[1] w-52 max-h-80 overflow-y-scroll p-2 shadow"
-                  >
-                    {langdata?.map((item, idx) => (
-                      <li
-                        onClick={() => {
-                          onSelect(item);
-                          setShowMenu(false);
-                        }}
-                        className="cursor-pointer"
-                        key={idx}
-                      >
-                        <a>{item}</a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+              <SelectDropdown
+                langdata={langdata}
+                language={language}
+                onSelect={onSelect}
+              ></SelectDropdown>
             </div>
             <div className="flex gap-2">
               <label

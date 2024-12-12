@@ -5,9 +5,11 @@ import { errorNotify } from "../../utils/getNotify";
 import { usePostContext } from "../../context/PostContextProvider";
 import { validateEmail } from "../../utils/helpers";
 import usePosts from "../../hooks/usePosts";
-import ProceedWithUpdatePostModal from "../../components/modals/ProceedWithUpdatePostModal";
+import {
+  ProceedWithUpdatePostModal,
+  SuccessModal,
+} from "../../components/modals";
 import RequestLoader from "../../components/shared/RequestLoader";
-import SuccessModal from "../../components/modals/SuccessModal";
 import BackToPrev from "../../components/shared/BackToPrev";
 
 const UpdatePost = () => {

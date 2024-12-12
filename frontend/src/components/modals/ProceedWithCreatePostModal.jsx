@@ -31,6 +31,11 @@ const ProceedWithCreatePostModal = ({
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-neutral-900"
                     onChange={(e) => handleChange(e, 50)}
                   />
+                  {info.name.length == 50 && (
+                    <p className="text-red-600 font-poppins">
+                      Max length 50 characters
+                    </p>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label
@@ -49,6 +54,11 @@ const ProceedWithCreatePostModal = ({
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500  text-neutral-900"
                     onChange={(e) => handleChange(e, 50)}
                   />
+                  {info.email.length == 50 && (
+                    <p className="text-red-600 font-poppins">
+                      Max length 50 characters
+                    </p>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label
@@ -67,6 +77,11 @@ const ProceedWithCreatePostModal = ({
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500  text-neutral-900"
                     onChange={(e) => handleChange(e, 50)}
                   />
+                  {info.title.length == 50 && (
+                    <p className="text-red-600 font-poppins">
+                      Max length 50 characters
+                    </p>
+                  )}
                 </div>
                 <div className="mb-6">
                   <label
@@ -85,6 +100,11 @@ const ProceedWithCreatePostModal = ({
                     required
                     className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-neutral-900"
                   ></textarea>
+                  {info.about.length == 1000 && (
+                    <p className="text-red-600 font-poppins">
+                      Max length 1000 characters
+                    </p>
+                  )}
                 </div>
                 <div className="flex gap-2">
                   <button

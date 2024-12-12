@@ -11,7 +11,9 @@ export default function DataGrid({
   return (
     <div className={`${className}`}>
       <If condition={loading}>
-        <Then>{() => <SearchLoader></SearchLoader>}</Then>
+        <Then>
+          <SearchLoader></SearchLoader>
+        </Then>
         <Else>
           <If condition={data.length == 0 || error}>
             <Then>

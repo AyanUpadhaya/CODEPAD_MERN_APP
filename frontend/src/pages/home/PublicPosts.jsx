@@ -2,14 +2,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import PublicPostCard from "../../components/cards/PublicPostCard";
-import CodeViewModal from "../../components/modals/CodeViewModal";
+import {CodeViewModal} from "../../components/modals";
 import { useState } from "react";
 import { If, Then, Else } from "react-if";
 import NoData from "../../components/shared/NoData";
 import SearchLoader from "../../components/shared/SearchLoader";
 import { usePostContext } from "../../context/PostContextProvider";
 import { useLocation, useNavigate } from "react-router-dom";
-// import usePosts from "../../hooks/usePosts";
+
 
 const PublicPosts = ({ navigate }) => {
   const { posts, loading, error } = usePostContext();
