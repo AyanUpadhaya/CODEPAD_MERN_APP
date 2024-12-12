@@ -12,9 +12,9 @@ import BackToPrev from "../../components/shared/BackToPrev";
 
 const UpdatePost = () => {
   const navigate = useNavigate();
-  const { handlePostUpadate, invalidateCache, isPosRequestLoading } =
-    usePostContext();
-  const { updatePost, isPostUpdating, isPosRequestSuccess } = usePosts();
+  const { handlePostUpadate, isPostRequestLoading } = usePostContext();
+  const { updatePost, isPostUpdating, isPostRequestSuccess } = usePosts();
+
   const { state } = useLocation();
   const { payload, previousPath } = state || {};
 
@@ -30,7 +30,7 @@ const UpdatePost = () => {
     email: payload?.email || "",
     secret: "",
   });
-  console.log(info)
+  console.log(info);
 
   //change state and handle character limit
   const handleChange = (event, maxLength = 1000) => {
@@ -71,7 +71,6 @@ const UpdatePost = () => {
     try {
       await updatePost(payload.id, myData);
       handlePostUpadate(payload.id, myData);
-      invalidateCache();
       setShowModal(true);
     } catch (error) {
       errorNotify(`${error?.message || "Failed to post"}`);
@@ -150,7 +149,7 @@ const UpdatePost = () => {
       <SuccessModal
         data={resData}
         msg="Post is updated"
-        isSuccess={isPosRequestSuccess && showModal && !isPosRequestLoading}
+        isSuccess={isPostRequestSuccess && showModal && !isPostRequestLoading}
         handleNavigate={handleNavigate}
       ></SuccessModal>
     </div>

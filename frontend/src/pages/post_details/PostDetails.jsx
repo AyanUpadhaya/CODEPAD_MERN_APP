@@ -15,15 +15,13 @@ import { usePostContext } from "../../context/PostContext";
 
 const PostDetails = () => {
   const params = useParams();
-
   const filteredData = useGetCachedPost(params?.id);
+
   const {
     singlePostError,
     getPostById,
     deletePost,
     isDeleteRequestLoading,
-    setCachedPost,
-    invalidateCache,
     handleDeletePost,
   } = usePostContext();
   const [postData, setPostData] = useState({});
@@ -41,7 +39,6 @@ const PostDetails = () => {
     deletePost(params.id, secretKey)
       .then((data) => {
         handleDeletePost(params.id);
-        invalidateCache();
         infoNotify("Post has been deleted");
         navigate("/docs");
       })
@@ -58,14 +55,6 @@ const PostDetails = () => {
       getPostById(id)
         .then((data) => {
           setPostData(data);
-          if (data.id) {
-            setCachedPost((prev) => {
-              if (prev.find((item) => item.id === data.id)) {
-                return prev; // If already exists, return as is
-              }
-              return [...prev, data];
-            });
-          }
         })
         .catch((err) => console.log("Error occured:", error))
         .finally(() => {

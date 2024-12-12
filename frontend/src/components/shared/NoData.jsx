@@ -9,7 +9,7 @@ function NoData() {
         <div className="mb-6">
           <img src={noData} alt="" className="w-48" />
         </div>
-        <h2 className="text-center text-lg">No data found!</h2>
+        <h2 className="text-center text-lg font-semibold">No Data Available!</h2>
       </div>
     </div>
   );

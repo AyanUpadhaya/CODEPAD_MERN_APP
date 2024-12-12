@@ -14,7 +14,7 @@ const Header = ({ navigate }) => {
           <p>
             <button
               onClick={() => navigate("/add_post")}
-              className="btn px-2 py-2 font-poppins text-white hover:text-neutral-800 bg-neutral-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-md"
+              className="btn-get-started"
             >
               Get Started
             </button>

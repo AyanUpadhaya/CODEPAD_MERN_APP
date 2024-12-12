@@ -4,10 +4,10 @@ import axios from "axios";
 const usePosts = () => {
   const [posts, setPosts] = useState([]); // Stores all posts
   const [loading, setLoading] = useState(false); // Loading state
-  const [isPosRequestLoading, setPosRequestLoading] = useState(false); // Loading state
+  const [isPostRequestLoading, setPostRequestLoading] = useState(false); // Loading state
   const [isDeleteRequestLoading, setDeleteRequestLoading] = useState(false); // Loading state
   const [isPostUpdating, setIsPostUpdating] = useState(false); // Loading state
-  const [isPosRequestSuccess, setPosRequestSuccess] = useState(false); // Loading state
+  const [isPostRequestSuccess, setPostRequestSuccess] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
   const [singlePostError, setSinglePostError] = useState(null); // Error state
   const [singlePostDeleteError, setSinglePostDeleteError] = useState(null); // Error state
@@ -49,19 +49,19 @@ const usePosts = () => {
 
   // Create a new post
   const createPost = async (postData) => {
-    setPosRequestLoading(true);
+    setPostRequestLoading(true);
     setError(null);
     try {
       const { data } = await api.post(END_POINTS["POST"], postData);
 
-      setPosRequestSuccess(true);
+      setPostRequestSuccess(true);
       return data?.data;
     } catch (err) {
       let message = getErrorMessage(err);
       setError(message);
       throw new Error(message);
     } finally {
-      setPosRequestLoading(false);
+      setPostRequestLoading(false);
       //await fetchPosts(); // Refetch posts after addition
     }
   };
@@ -92,7 +92,7 @@ const usePosts = () => {
         `${END_POINTS["PUT"]}/${postId}`,
         updateData
       );
-      setPosRequestSuccess(true);
+      setPostRequestSuccess(true);
       return data?.data;
     } catch (err) {
       let message = getErrorMessage(err);
@@ -128,8 +128,8 @@ const usePosts = () => {
     singlePostError,
     singlePostDeleteError,
     singlePostUpdateError,
-    isPosRequestLoading,
-    isPosRequestSuccess,
+    isPostRequestLoading,
+    isPostRequestSuccess,
     isDeleteRequestLoading,
     isPostUpdating,
     setPosts,

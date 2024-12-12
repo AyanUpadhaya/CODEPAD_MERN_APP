@@ -24,12 +24,12 @@ export default function PostContextProvider({ children }) {
     getPostById,
     deletePost,
     isDeleteRequestLoading,
-    isPosRequestLoading,
+    isPostRequestLoading,
   } = usePosts();
+
   const [language, setLanguage] = useState("javascript");
   const [searchValue, setSearchValue] = useState("");
   const [isAscending, setIsAscending] = useState(false);
-  const [cachedPost, setCachedPost] = useState([]);
 
   const onSelect = (language) => {
     setLanguage(language);
@@ -53,10 +53,6 @@ export default function PostContextProvider({ children }) {
     const itemIndx = localTemp.findIndex((item) => item.id == postId);
     localTemp[itemIndx] = { ...localTemp[itemIndx], ...updateData };
     setPosts(localTemp);
-  };
-
-  const invalidateCache = () => {
-    setCachedPost([]);
   };
 
   //sort by timestamp
@@ -88,14 +84,11 @@ export default function PostContextProvider({ children }) {
     onSelect,
     sortByTime,
     langdata,
-    cachedPost,
-    setCachedPost,
     getPostById,
     deletePost,
     isDeleteRequestLoading,
-    isPosRequestLoading,
+    isPostRequestLoading,
     handleNewPost,
-    invalidateCache,
     handleDeletePost,
     handlePostUpadate,
   };

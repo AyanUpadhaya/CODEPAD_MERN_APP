@@ -4,7 +4,7 @@ const ProceedWithUpdatePostModal = ({
   info,
   handleChange,
   handleSubmit,
-  isPosRequestLoading,
+  isPostRequestLoading,
 }) => {
   return (
     <>
@@ -106,7 +106,7 @@ const ProceedWithUpdatePostModal = ({
                 </div>
                 <div className="flex gap-2">
                   <button
-                    disabled={isPosRequestLoading}
+                    disabled={isPostRequestLoading}
                     type="submit"
                     className=" text-white px-4 py-2 rounded-md bg-blue-600 focus:outline-none"
                   >

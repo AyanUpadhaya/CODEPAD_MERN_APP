@@ -1,8 +1,8 @@
 import { usePostContext } from "../../context/PostContext";
 
 export default function useGetCachedPost(postId) {
-  const { cachedPost } = usePostContext();
-  const filteredPost = cachedPost.find((item) => item.id == postId);
+  const { posts } = usePostContext();
+  const filteredPost = posts.find((item) => item.id == postId);
 
   return filteredPost;
 }

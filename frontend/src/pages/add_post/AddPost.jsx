@@ -42,9 +42,9 @@ const AddPost = () => {
     }));
   };
 
-  const { handleNewPost, invalidateCache } = usePostContext();
+  const { handleNewPost } = usePostContext();
 
-  const { createPost, isPosRequestLoading, error, isPosRequestSuccess } =
+  const { createPost, isPostRequestLoading, error, isPostRequestSuccess } =
     usePosts();
 
   //functions
@@ -95,7 +95,6 @@ const AddPost = () => {
           email: "",
         });
         setShowModal(true);
-        invalidateCache();
         //to update contenxt
         handleNewPost(data);
       })
@@ -229,14 +228,14 @@ const AddPost = () => {
         info={info}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        isPosRequestLoading={isPosRequestLoading}
+        isPostRequestLoading={isPostRequestLoading}
       ></ProceedWithCreatePostModal>
 
-      {isPosRequestLoading && <RequestLoader></RequestLoader>}
+      {isPostRequestLoading && <RequestLoader></RequestLoader>}
       <SuccessModal
         data={resData}
         msg="Please copy the secret key"
-        isSuccess={isPosRequestSuccess && showModal && !isPosRequestLoading}
+        isSuccess={isPostRequestSuccess && showModal && !isPostRequestLoading}
         handleNavigate={handleNavigate}
       ></SuccessModal>
     </div>

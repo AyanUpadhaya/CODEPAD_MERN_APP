@@ -73,7 +73,7 @@ const PublicPosts = ({ navigate }) => {
                   },
                 }}
                 autoplay={{
-                  delay: 1500,
+                  delay: 3000,
                   disableOnInteraction: false,
                 }}
                 modules={[Autoplay]}
@@ -103,7 +103,7 @@ const PublicPosts = ({ navigate }) => {
       <div className="max-w-[1200px] mx-auto h-full flex flex-col justify-between items-center">
         <div className="py-5 flex flex-col gap-2 md:gap-5 ">
           <h2 className="text-neutral-950 font-poppins font-normal text-2xl sm:text-4xl md:text-6xl text-center">
-            Top Trendings
+            Public Posts
           </h2>
           <p className="text-neutral-950 font-poppins font-normal text-base sm:text-lg md:text-2xl text-center">
             See what people are posting

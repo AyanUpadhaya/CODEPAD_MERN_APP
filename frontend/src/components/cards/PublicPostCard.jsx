@@ -26,14 +26,14 @@ const PublicPostCard = ({ data, setSelectedItem, handleNavigate }) => {
             <label
               htmlFor="codeViewPopUp"
               onClick={() => setSelectedItem(data)}
-              className="hidden sm:block text-center cursor-pointer p-1 font-poppins text-white hover:text-neutral-800 bg-neutral-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-badge"
+              className="hidden sm:block btn-view-code"
             >
               View Code
             </label>
             <button
               htmlFor="codeViewPopUp"
-              onClick={() => handleNavigate("/view-mobile",data)}
-              className="sm:hidden text-center cursor-pointer p-1 font-poppins text-white hover:text-neutral-800 bg-neutral-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-badge"
+              onClick={() => handleNavigate("/view-mobile", data)}
+              className="sm:hidden btn-view-code"
             >
               View Code
             </button>

@@ -27,7 +27,7 @@ const DocPostCard = ({ data }) => {
           <div className="card-actions justify-between">
             <label
               onClick={() => navigate(`/details/${data?.id}`)}
-              className="text-center cursor-pointer p-1 font-poppins text-white hover:text-neutral-800 bg-neutral-800 w-[110px] h-auto border-none hover:bg-tertiary-500 text-sm rounded-badge"
+              className="btn-view-code"
             >
               View Post
             </label>
