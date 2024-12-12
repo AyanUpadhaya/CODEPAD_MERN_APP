@@ -11,7 +11,7 @@ import { errorNotify, infoNotify } from "../../utils/getNotify";
 import RequestLoader from "../../components/shared/RequestLoader";
 import BackToPrev from "../../components/shared/BackToPrev";
 import useGetCachedPost from "./useGetCachedPost";
-import { usePostContext } from "../../context/PostContext";
+import { usePostContext } from "../../context/PostContextProvider";
 
 const PostDetails = () => {
   const params = useParams();

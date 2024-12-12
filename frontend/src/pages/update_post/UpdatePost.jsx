@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@monaco-editor/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { errorNotify } from "../../utils/getNotify";
-import { usePostContext } from "../../context/PostContext";
+import { usePostContext } from "../../context/PostContextProvider";
 import { validateEmail } from "../../utils/helpers";
 import usePosts from "../../hooks/usePosts";
 import ProceedWithUpdatePostModal from "../../components/modals/ProceedWithUpdatePostModal";

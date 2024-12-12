@@ -8,8 +8,7 @@ import {
 import { langdata } from "../utils/langdata";
 
 import usePosts from "../hooks/usePosts";
-
-export const PostContext = createContext(null);
+import { PostContext } from "./contexts";
 
 export default function PostContextProvider({ children }) {
   const {
@@ -39,8 +38,6 @@ export default function PostContextProvider({ children }) {
     setPosts((prev) => [...prev, newPost]);
   };
   const handleDeletePost = (postId) => {
-    // const updated = [...posts].filter((post) => post.id !== postId);
-    // setPosts(updated);
 
     const temp = [...posts];
     const itemIndx = temp.findIndex((item) => item.id == postId);

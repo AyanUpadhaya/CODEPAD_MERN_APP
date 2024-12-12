@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { usePostContext } from "../../context/PostContext";
+import { usePostContext } from "../../context/PostContextProvider";
 import { useFilters } from "../../hooks/useFilters";
 import DataGrid from "./DataGrid";
 import SearchFilter from "./SearchFilter";

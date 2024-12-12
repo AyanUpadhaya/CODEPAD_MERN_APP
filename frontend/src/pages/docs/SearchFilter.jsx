@@ -1,4 +1,4 @@
-import { usePostContext } from "../../context/PostContext";
+import { usePostContext } from "../../context/PostContextProvider";
 import Search from "../../components/shared/Search";
 import SelectDropdown from "./SelectDropdown";
 export default function SearchFilter({ className }) {

@@ -6,12 +6,11 @@ import RequestLoader from "../../components/shared/RequestLoader";
 import SuccessModal from "../../components/modals/SuccessModal";
 import usePosts from "../../hooks/usePosts";
 import { errorNotify } from "../../utils/getNotify";
-
 import { replace, useNavigate } from "react-router-dom";
 import { langdata } from "../../utils/langdata";
-import { usePostContext } from "../../context/PostContext";
+import { usePostContext } from "../../context/PostContextProvider";
 import { fileDownloader, validateEmail } from "../../utils/helpers";
-import { limitCharacters } from "../../utils/helpers";
+
 
 const AddPost = () => {
   const editorRef = useRef();

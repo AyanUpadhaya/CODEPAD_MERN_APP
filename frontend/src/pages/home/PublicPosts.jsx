@@ -7,7 +7,7 @@ import { useState } from "react";
 import { If, Then, Else } from "react-if";
 import NoData from "../../components/shared/NoData";
 import SearchLoader from "../../components/shared/SearchLoader";
-import { usePostContext } from "../../context/PostContext";
+import { usePostContext } from "../../context/PostContextProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 // import usePosts from "../../hooks/usePosts";
 

@@ -1,4 +1,4 @@
-import { usePostContext } from "../../context/PostContext";
+import { usePostContext } from "../../context/PostContextProvider";
 
 export default function useGetCachedPost(postId) {
   const { posts } = usePostContext();
