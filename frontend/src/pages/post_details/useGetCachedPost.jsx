@@ -1,8 +1,10 @@
 import { usePostContext } from "../../context/PostContextProvider";
 
-export default function useGetCachedPost(postId) {
+export default function useGetCachedPost(postKey) {
   const { posts } = usePostContext();
-  const filteredPost = posts.find((item) => item.id == postId);
+  const filteredPost = posts.find(
+    (item) => String(item.id) === postKey || item.slug === postKey
+  );
 
   return filteredPost;
 }

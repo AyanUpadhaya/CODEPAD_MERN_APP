@@ -1,5 +1,6 @@
 import React from "react";
 import { success } from "../../assets/getAssets";
+import SharePostButton from "../shared/SharePostButton";
 const SuccessModal = ({ data, msg, isSuccess, handleNavigate }) => {
   return (
     <>
@@ -36,10 +37,15 @@ const SuccessModal = ({ data, msg, isSuccess, handleNavigate }) => {
               </div>
             </div>
             <div>
-              <div className="w-full flex justify-center">
+              <div className="w-full flex justify-center gap-3">
+                <SharePostButton
+                  postSlug={data?.slug}
+                  postId={data?.id}
+                  className="btn btn-outline"
+                />
                 <label
                   onClick={() => {
-                    handleNavigate(`/details/${data.id}`);
+                    handleNavigate(`/details/${data.slug || data.id}`);
                   }}
                   htmlFor="successModal"
                   className="btn btn-success"

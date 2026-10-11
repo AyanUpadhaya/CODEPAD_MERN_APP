@@ -12,12 +12,13 @@ import useGetCachedPost from "./useGetCachedPost";
 import { usePostContext } from "../../context/PostContextProvider";
 
 const PostDetails = () => {
-  const params = useParams();
-  const filteredData = useGetCachedPost(params?.id);
+  const { postKey } = useParams();
+  const filteredData = useGetCachedPost(postKey);
 
   const {
     singlePostError,
     getPostById,
+    getPostBySlug,
     deletePost,
     isDeleteRequestLoading,
     handleDeletePost,
@@ -34,9 +35,9 @@ const PostDetails = () => {
       return;
     }
 
-    deletePost(params.id, secretKey)
+    deletePost(postData.id, secretKey)
       .then((data) => {
-        handleDeletePost(params.id);
+        handleDeletePost(postData.id);
         infoNotify("Post has been deleted");
         navigate("/docs");
       })
@@ -45,25 +46,26 @@ const PostDetails = () => {
       });
   };
 
-  function checkDataExist(id) {
+  function checkDataExist(postKey) {
     if (filteredData) {
       setPostData(filteredData);
     } else {
       setIsPending(true);
-      getPostById(id)
+      const loadPost = /^\d+$/.test(postKey) ? getPostById : getPostBySlug;
+      loadPost(postKey)
         .then((data) => {
           setPostData(data);
         })
-        .catch((err) => console.log("Error occured:", error))
+        .catch((err) => console.error("Error occurred while loading post:", err))
         .finally(() => {
           setIsPending(false);
         });
     }
   }
   useEffect(() => {
-    checkDataExist(params.id);
+    checkDataExist(postKey);
     window.scrollTo(0, 0);
-  }, []);
+  }, [postKey]);
 
   return (
     <div className="max-w-[1200px] mx-auto p-10 h-screen">

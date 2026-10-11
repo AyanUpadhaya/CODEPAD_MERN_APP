@@ -75,9 +75,26 @@ const usePosts = () => {
       return data; // Return the post data
     } catch (err) {
       let message = getErrorMessage(err);
-      setError(message);
+      setSinglePostError(message);
       throw new Error(message);
-      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Get a single post by its public slug
+  const getPostBySlug = async (slug) => {
+    setLoading(true);
+    setSinglePostError(null);
+    try {
+      const { data } = await api.get(
+        `${END_POINTS["GET"]}/slug/${encodeURIComponent(slug)}`
+      );
+      return data;
+    } catch (err) {
+      let message = getErrorMessage(err);
+      setSinglePostError(message);
+      throw new Error(message);
     } finally {
       setLoading(false);
     }
@@ -136,6 +153,7 @@ const usePosts = () => {
     fetchPosts,
     createPost,
     getPostById,
+    getPostBySlug,
     updatePost,
     deletePost,
   };

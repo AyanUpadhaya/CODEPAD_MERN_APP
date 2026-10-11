@@ -26,7 +26,7 @@ const routes = createBrowserRouter([
         element: <UpdatePost></UpdatePost>,
       },
       {
-        path: "/details/:id",
+        path: "/details/:postKey",
         element: <PostDetails></PostDetails>,
       },
       {

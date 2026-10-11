@@ -26,7 +26,7 @@ const DocPostCard = ({ data }) => {
           </p>
           <div className="card-actions justify-between">
             <label
-              onClick={() => navigate(`/details/${data?.id}`)}
+              onClick={() => navigate(`/details/${data?.slug || data?.id}`)}
               className="btn-view-code"
             >
               View Post

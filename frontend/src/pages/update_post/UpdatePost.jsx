@@ -71,8 +71,9 @@ const UpdatePost = () => {
       return;
     }
     try {
-      await updatePost(payload.id, myData);
-      handlePostUpadate(payload.id, myData);
+      const updatedPost = await updatePost(payload.id, myData);
+      handlePostUpadate(payload.id, updatedPost);
+      setResData(updatedPost);
       setShowModal(true);
     } catch (error) {
       errorNotify(`${error?.message || "Failed to post"}`);

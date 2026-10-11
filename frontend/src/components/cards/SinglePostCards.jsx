@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import formatTimestamp from "../../utils/formatTimestamp";
+import SharePostButton from "../shared/SharePostButton";
 
 const SinglePostCards = ({ data, setSelectedItem }) => {
   
@@ -62,6 +63,11 @@ const SinglePostCards = ({ data, setSelectedItem }) => {
             >
               Edit
             </button>
+            <SharePostButton
+              postSlug={data?.slug}
+              postId={data?.id}
+              className="btn-view-code"
+            />
             <label htmlFor="ConfirmationModal" className="btn-delete">
               Delete
             </label>

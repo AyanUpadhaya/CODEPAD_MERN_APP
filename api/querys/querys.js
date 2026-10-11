@@ -2,8 +2,8 @@ const { pool } = require("../db/db");
 
 const create = async (prop) => {
   const INSERT_QUERY = `
-    INSERT INTO publiccodeposts (title, about, language, code, timestamp, name, email, secret)
-    VALUES (?, ?, LOWER(?), ?, ?, ?, ?, ?);
+    INSERT INTO publiccodeposts (title, slug, about, language, code, timestamp, name, email, secret)
+    VALUES (?, ?, ?, LOWER(?), ?, ?, ?, ?, ?);
   `;
 
   const SELECT_QUERY = `
@@ -16,12 +16,22 @@ const create = async (prop) => {
     client = await pool.getConnection();
 
     // Destructure and include `secret`
-    const { title, about, language, code, timestamp, name, email, secret } =
-      prop;
+    const {
+      title,
+      slug,
+      about,
+      language,
+      code,
+      timestamp,
+      name,
+      email,
+      secret,
+    } = prop;
 
     // Insert data
     const [insertResult] = await client.query(INSERT_QUERY, [
       title,
+      slug,
       about,
       language,
       code,
@@ -65,7 +75,7 @@ const findByEmail = async (email) => {
 };
 
 const find = async () => {
-  const QUERY = `SELECT id, title, about, language, code, timestamp, name, email FROM publiccodeposts`;
+  const QUERY = `SELECT id, title, slug, about, language, code, timestamp, name, email FROM publiccodeposts`;
   let client;
   try {
     client = await pool.getConnection();
@@ -81,7 +91,7 @@ const find = async () => {
 
 const findById = async (id) => {
   const QYERY =
-    "SELECT id, title, about, language, code, timestamp, name, email FROM publiccodeposts WHERE id = ?";
+    "SELECT id, title, slug, about, language, code, timestamp, name, email FROM publiccodeposts WHERE id = ?";
   let client;
   try {
     client = await pool.getConnection();
@@ -95,10 +105,26 @@ const findById = async (id) => {
   }
 };
 
+const findBySlug = async (slug) => {
+  const QUERY =
+    "SELECT id, title, slug, about, language, code, timestamp, name, email FROM publiccodeposts WHERE slug = ?";
+  let client;
+  try {
+    client = await pool.getConnection();
+    const [rows] = await client.query(QUERY, [slug]);
+    return rows[0];
+  } catch (error) {
+    console.error("Error occurred while finding the record by slug:", error);
+    throw error;
+  } finally {
+    if (client) client.release();
+  }
+};
+
 const updateByIdAndSecret = async (update, id, secret) => {
   const UPDATE_QUERY = `UPDATE publiccodeposts SET ? WHERE id = ? AND secret = ?`;
   const SELECT_QUERY = `
-    SELECT id, title, about, language, code, timestamp, name, email 
+    SELECT id, title, slug, about, language, code, timestamp, name, email
     FROM publiccodeposts WHERE id = ?;
   `;
   let client;
@@ -144,6 +170,7 @@ module.exports = {
   findByEmail,
   find,
   findById,
+  findBySlug,
   updateByIdAndSecret,
   deleteByIdAndSecret,
 };

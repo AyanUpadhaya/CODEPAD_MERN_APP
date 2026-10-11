@@ -4,6 +4,7 @@
 CREATE TABLE IF NOT EXISTS `publiccodeposts` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
+  `slug` VARCHAR(255) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   `about` TEXT NOT NULL,
   `language` VARCHAR(100) NOT NULL,
   `code` LONGTEXT NOT NULL,
@@ -12,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `publiccodeposts` (
   `email` VARCHAR(254) NOT NULL,
   `secret` CHAR(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_publiccodeposts_slug` (`slug`),
   KEY `idx_publiccodeposts_email` (`email`(191))
 ) ENGINE=InnoDB
   DEFAULT CHARACTER SET=utf8mb4

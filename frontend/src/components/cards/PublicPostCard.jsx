@@ -1,4 +1,5 @@
 import formatTimestamp from "../../utils/formatTimestamp";
+import SharePostButton from "../shared/SharePostButton";
 
 const PublicPostCard = ({ data, setSelectedItem, handleNavigate }) => {
   return (
@@ -37,6 +38,11 @@ const PublicPostCard = ({ data, setSelectedItem, handleNavigate }) => {
             >
               View Code
             </button>
+            <SharePostButton
+              postSlug={data?.slug}
+              postId={data?.id}
+              className="btn-view-code"
+            />
           </div>
         </div>
       </div>
